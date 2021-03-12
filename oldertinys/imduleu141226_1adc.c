@@ -19,7 +19,7 @@
  * geht sonst mit an (Du kannst es Deinem Laptop auch zu fressen geben).
  *
  * (*ach isser jetzt aus? War nur Spaß!)
- * Liebe Nadine, ein schönes Weihnachtsfest wünsch ich Dir und dass Du mit lieben 
+ * L#### ######, ein schönes Weihnachtsfest wünsch ich Dir und dass Du mit lieben 
  * Leuten um Dich rum eine schöne Zeit verbringst. Und ein wenig Festtagsruhe 
  * sollst Du Dir auch gönnen. Hier guck:
  *
