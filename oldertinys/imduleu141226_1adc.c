@@ -170,7 +170,7 @@
  * Jetzt ist es schon besser. Und was soll das nun sein? Hm sagen wir mal,es fängt mit "H" an und
  * endet mit "and". Kann aber auch anders was sein. Das hängt noch davon ab, wie mans baut.
  * 
- *                Ich fand nämlich unseren Ausflug an der Elbe sehr schön.
+ *                ### #### ####### ####### ####### ## ### #### #### #####.
  *
  * Aber das Jessy so selten zu sehen war ist mir auch nicht entgangen. Da hab ich so bei mir
  * gedacht, so ein Hundehalsband was leuchtet wäre toll und das kann ich doch auch bauen. 
