@@ -1,0 +1,5 @@
+timecode: xxx:xx:ms
+stereo in 1
+sampling rate 44100Hz
+
+source: Der Sound des Sommers... .mp3
