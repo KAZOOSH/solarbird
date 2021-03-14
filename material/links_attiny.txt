@@ -1,3 +1,4 @@
+https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf
 https://www.monsterli.ch/blog/elektronik/mikrocontroller/attiny25-attiny45-attiny85-sammelsurium/
 http://www.technoblogy.com/show?QVN
 http://www.technoblogy.com/show?QBB
