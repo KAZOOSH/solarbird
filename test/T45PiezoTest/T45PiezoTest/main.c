@@ -1,5 +1,5 @@
 /*
- * T45PiezoTest.c *
+ * T45PiezoTest.c
  * Created: 23.03.2021 20:25:44
  * Author : 25mmHg
  * Fuses: lfuse=c2, hfuse=DF, efuse=FF
@@ -73,7 +73,7 @@ void piepsen(uint16_t n, uint16_t t)
 
 
 //WDT-Interrupt-init
-// START 8s TIMER, STROMVERBRAUCH 6 MIKROAMPRE
+//START 8s TIMER, CURRENT DRAW 6uA
 void init_wdt()
 {
 	cli();
@@ -85,7 +85,8 @@ void init_wdt()
 
 
 //WDT-Interrupt
-ISR(WDT_vect)  // wakeup from sleeping
+//WAKEUP
+ISR(WDT_vect)
 {
 	wdtcnt++;
 }
@@ -113,6 +114,7 @@ int main(void)
 		piepsen(700, 7);
 		piepsen(800, 6);
 		piepsen(1000, 5);
+		// SLEEP CURRENT DRAW 6uA
 		sleep_mode();
     }
 }

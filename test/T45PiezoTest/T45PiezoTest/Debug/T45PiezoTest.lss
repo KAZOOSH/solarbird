@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  0000008c  00000000  00000000  00001290  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000339  00000000  00000000  0000131c  2**0
+ 10 .debug_str    00000341  00000000  00000000  0000131c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000144  00000000  00000000  00001655  2**0
+ 11 .debug_loc    00000144  00000000  00000000  0000165d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000030  00000000  00000000  00001799  2**0
+ 12 .debug_ranges 00000030  00000000  00000000  000017a1  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -159,7 +159,7 @@ void piepsen(uint16_t n, uint16_t t)
 00000082 <init_wdt>:
 
 //WDT-Interrupt-init
-// START 8s TIMER, STROMVERBRAUCH 6 MIKROAMPRE
+//START 8s TIMER, CURRENT DRAW 6uA
 void init_wdt()
 {
 	cli();
@@ -179,11 +179,11 @@ void init_wdt()
   94:	08 95       	ret
 
 00000096 <__vector_12>:
-}
 
 
 //WDT-Interrupt
-ISR(WDT_vect)  // wakeup from sleeping
+//WAKEUP
+ISR(WDT_vect)
 {
   96:	1f 92       	push	r1
   98:	0f 92       	push	r0
@@ -290,6 +290,7 @@ int main(void)
  132:	88 ee       	ldi	r24, 0xE8	; 232
  134:	93 e0       	ldi	r25, 0x03	; 3
  136:	8f df       	rcall	.-226    	; 0x56 <piepsen>
+		// SLEEP CURRENT DRAW 6uA
 		sleep_mode();
  138:	85 b7       	in	r24, 0x35	; 53
  13a:	80 62       	ori	r24, 0x20	; 32
