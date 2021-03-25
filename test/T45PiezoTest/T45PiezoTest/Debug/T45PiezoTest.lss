@@ -19,7 +19,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 0000057c  00000000  00000000  000009d9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000339  00000000  00000000  00000f55  2**0
+  8 .debug_line   0000033b  00000000  00000000  00000f55  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  0000008c  00000000  00000000  00001290  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -79,7 +79,7 @@ Disassembly of section .text:
 00000040 <var_delay_10us>:
 volatile uint16_t wdtcnt = 0;
 
-//Variable delay
+//Variable delay in 10us steps
 void var_delay_10us(uint8_t ten_us)
 {
 	for (uint8_t i=0; i<ten_us; i++) _delay_us(10);
@@ -113,25 +113,25 @@ void piepsen(uint16_t n, uint16_t t)
   5c:	df 93       	push	r29
   5e:	ec 01       	movw	r28, r24
   60:	16 2f       	mov	r17, r22
-	PIEPPORT |= 1<<PIEPA;
+	PIEPPORT |= 1<<PIEPA; //HIGH
   62:	c3 9a       	sbi	0x18, 3	; 24
-	PIEPPORT &= ~(1<<PIEPB);
+	PIEPPORT &= ~(1<<PIEPB); //LOW
   64:	c4 98       	cbi	0x18, 4	; 24
 	while(n)
   66:	89 2b       	or	r24, r25
   68:	39 f0       	breq	.+14     	; 0x78 <piepsen+0x22>
 	{
 		n--;
-		PIEPPIN = (1<<PIEPB | 1<<PIEPA);
+		PIEPPIN = (1<<PIEPB | 1<<PIEPA);//TOGGELN
   6a:	08 e1       	ldi	r16, 0x18	; 24
 {
-	PIEPPORT |= 1<<PIEPA;
-	PIEPPORT &= ~(1<<PIEPB);
+	PIEPPORT |= 1<<PIEPA; //HIGH
+	PIEPPORT &= ~(1<<PIEPB); //LOW
 	while(n)
 	{
 		n--;
   6c:	21 97       	sbiw	r28, 0x01	; 1
-		PIEPPIN = (1<<PIEPB | 1<<PIEPA);
+		PIEPPIN = (1<<PIEPB | 1<<PIEPA);//TOGGELN
   6e:	06 bb       	out	0x16, r16	; 22
 		var_delay_10us(t);
   70:	81 2f       	mov	r24, r17
@@ -139,14 +139,14 @@ void piepsen(uint16_t n, uint16_t t)
 //Pieps
 void piepsen(uint16_t n, uint16_t t)
 {
-	PIEPPORT |= 1<<PIEPA;
-	PIEPPORT &= ~(1<<PIEPB);
+	PIEPPORT |= 1<<PIEPA; //HIGH
+	PIEPPORT &= ~(1<<PIEPB); //LOW
 	while(n)
   74:	20 97       	sbiw	r28, 0x00	; 0
   76:	d1 f7       	brne	.-12     	; 0x6c <piepsen+0x16>
 	{
 		n--;
-		PIEPPIN = (1<<PIEPB | 1<<PIEPA);
+		PIEPPIN = (1<<PIEPB | 1<<PIEPA);//TOGGELN
 		var_delay_10us(t);
 	}
 }
@@ -212,9 +212,9 @@ ISR(WDT_vect)
 int main(void)
 {
     //init
-	PIEPDDR |= 1<<PIEPA;
+	PIEPDDR |= 1<<PIEPA;//OUTPUT
   c4:	bb 9a       	sbi	0x17, 3	; 23
-	PIEPDDR |= 1<<PIEPB;
+	PIEPDDR |= 1<<PIEPB;//OUTPUT
   c6:	bc 9a       	sbi	0x17, 4	; 23
 	
 	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
@@ -222,7 +222,7 @@ int main(void)
   ca:	87 7e       	andi	r24, 0xE7	; 231
   cc:	80 61       	ori	r24, 0x10	; 16
   ce:	85 bf       	out	0x35, r24	; 53
-	init_wdt();
+	init_wdt();//WECKEN DUCH WATCHDOGTIMER VORBEREITET
   d0:	d8 df       	rcall	.-80     	; 0x82 <init_wdt>
 		
 	//Job
