@@ -6,3 +6,5 @@ https://skootsone.yolasite.com/solar-led.php
 http://www.elektronik-labor.de/Notizen/Solarlampen.html
 https://www.elektronik-labor.de/Notizen/LEDwandler.html
 
+https://datasheetspdf.com/datasheet/YX8051.html
+
