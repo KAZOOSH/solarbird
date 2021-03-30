@@ -4,14 +4,14 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "Solaranimal210329_1841"
-Date "2021-03-29"
-Rev "1.01"
+Title "Solaranimal210330_1217"
+Date "2021-03-30"
+Rev "1.011"
 Comp "KAZOOSH!"
-Comment1 "(version with Reset-Button and changed LED connection)"
+Comment1 "V1.011(new R values, RESET-SW and changed LED connection)"
 Comment2 "2.5.2021 to 9.5.2021"
 Comment3 "wochedesgutenlebens.de"
-Comment4 ""
+Comment4 "open hardware: github.com/kazoosh"
 $EndDescr
 $Comp
 L Diode:BAT48RL D1
@@ -134,7 +134,7 @@ L Device:R R3
 U 1 1 606547AF
 P 2650 2900
 F 0 "R3" H 2720 2946 50  0000 L CNN
-F 1 "470k" H 2720 2855 50  0000 L CNN
+F 1 "510k" H 2720 2855 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2580 2900 50  0001 C CNN
 F 3 "~" H 2650 2900 50  0001 C CNN
 	1    2650 2900
@@ -248,7 +248,7 @@ L Device:R R1
 U 1 1 60654BA9
 P 2200 2900
 F 0 "R1" H 2270 2946 50  0000 L CNN
-F 1 "1,5M" H 2270 2855 50  0000 L CNN
+F 1 "1M" H 2270 2855 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" H 2270 2809 50  0001 L CNN
 F 3 "~" H 2200 2900 50  0001 C CNN
 	1    2200 2900
@@ -259,7 +259,7 @@ L Device:R R2
 U 1 1 6065521D
 P 2200 4400
 F 0 "R2" H 2270 4446 50  0000 L CNN
-F 1 "470k" H 2270 4355 50  0000 L CNN
+F 1 "330k" H 2270 4355 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2130 4400 50  0001 C CNN
 F 3 "~" H 2200 4400 50  0001 C CNN
 	1    2200 4400
