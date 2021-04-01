@@ -77,21 +77,10 @@ L Transistor_FET:2N7000 Q1
 U 1 1 6064ACD5
 P 2550 4150
 F 0 "Q1" H 2700 4350 50  0000 L CNN
-F 1 "2N7000" H 2700 3950 50  0000 L CNN
+F 1 "2N7000" H 2550 3800 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 2750 4075 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 2550 4150 50  0001 L CNN
 	1    2550 4150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Transistor_FET:BS170 Q2
-U 1 1 6064E0A2
-P 3100 4150
-F 0 "Q2" H 3250 4350 50  0000 L CNN
-F 1 "BS170" H 3250 3950 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 3300 4075 50  0001 L CIN
-F 3 "https://www.onsemi.com/pub/Collateral/BS170-D.PDF" H 3100 4150 50  0001 L CNN
-	1    3100 4150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -627,4 +616,15 @@ Wire Wire Line
 Connection ~ 9200 3950
 Wire Wire Line
 	7850 4050 9200 4050
+$Comp
+L Joe_Library:ZVN4206AVSTZ Q2
+U 1 1 606703B3
+P 3100 4150
+F 0 "Q2" H 3300 4350 50  0000 L CNN
+F 1 "ZVN4206AVSTZ" H 3050 3800 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 3300 4075 50  0001 L CIN
+F 3 "https://docs.rs-online.com/0ef4/0900766b81321be1.pdf" H 3100 4150 50  0001 L CNN
+	1    3100 4150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
