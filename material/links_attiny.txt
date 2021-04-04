@@ -10,3 +10,4 @@ http://ww1.microchip.com/downloads/en/AppNotes/doc8003.pdf
 http://ww1.microchip.com/downloads/en/Appnotes/atmel-8456-8-and-32-bit-avr-microcontrollers-avr127-understanding-adc-parameters_application-note.pdf
 http://ww1.microchip.com/downloads/en/Appnotes/Atmel-2559-Characterization-and-Calibration-of-the-ADC-on-an-AVR_ApplicationNote_AVR120.pdf
 https://microchipdeveloper.com/8avr:adcdiff
+https://blog.podkalicki.com/100-projects-on-attiny13/
