@@ -1,0 +1,13 @@
+pcb manufacturer tested with sharing options:
+
+https://aisler.net/p/BBQTFBOA #####Germany Board V1.3 (add PROTO, remove 3.hole, add 2resistors for Akku state and mic bias)
+https://oshpark.com/shared_projects/yvOFolXe #####Canada Board V1.31 ("After Dark" design)
+
+pcb manufacturer also tested:
+https://www.pcbway.com/ #####China
+https://jlcpcb.com/ #####China
+
+pcb manufacturer today not testet:
+https://www.pcb-supermarkt.de/ #####Germany
+
+
