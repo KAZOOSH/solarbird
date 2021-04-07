@@ -1,0 +1,2 @@
+https://aisler.net/p/BBQTFBOA #####Board V1.3 (add PROTO, remove 3.hole, add 2resistors for Akku state and mic bias)
+https://oshpark.com/shared_projects/yvOFolXe #####Board V1.31 ("After Dark" design)
