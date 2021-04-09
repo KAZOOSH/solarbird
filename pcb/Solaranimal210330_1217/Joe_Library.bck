@@ -30,7 +30,7 @@ F https://datasheetspdf.com/pdf-file/1469510/Shiningic/YX8051/1
 $ENDCMP
 #
 $CMP ZVN4206AVSTZ
-D N-Channel MOSFET, TO-92 0,6A Id, 60V Vds, 1,5Ohm Rdson @ Vgs=5V
+D N-Channel MOSFET, TO-92 0,6A Id, 60V Vds, 1,5Ohm Rdson @ Vgs=5V 
 K N-Channel MOSFET
 F https://docs.rs-online.com/0ef4/0900766b81321be1.pdf
 $ENDCMP

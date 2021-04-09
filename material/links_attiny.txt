@@ -5,3 +5,10 @@ http://www.technoblogy.com/show?QBB
 http://www.technoblogy.com/show?ZU7
 http://elm-chan.org/works/sd8p/report.html
 http://elm-chan.org/works/sd20p/report.html
+ADC App notes:
+http://ww1.microchip.com/downloads/en/AppNotes/doc8003.pdf
+http://ww1.microchip.com/downloads/en/Appnotes/atmel-8456-8-and-32-bit-avr-microcontrollers-avr127-understanding-adc-parameters_application-note.pdf
+http://ww1.microchip.com/downloads/en/Appnotes/Atmel-2559-Characterization-and-Calibration-of-the-ADC-on-an-AVR_ApplicationNote_AVR120.pdf
+https://microchipdeveloper.com/8avr:adcdiff
+https://blog.podkalicki.com/100-projects-on-attiny13/
+https://www.instructables.com/ElectronicKittyEars-Headset-DIY/ #####DIY Programmer for Kittys
