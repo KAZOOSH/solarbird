@@ -1,10 +1,10 @@
 #show all LFSR states
 lfsr_state = 0xACE1
 for i in range(100000):
-  print(i, lfsr_state)
+  print('#', i,',', lfsr_state)
   lfsr_state=(lfsr_state >> 1)^(-(lfsr_state & 1) & 0xB400) # nach E.Galois
   
-# LFSR 100000 STEPS:
+# 16Bit LFSR 100000 steps (at step 65535 restart again):
 
 # 0 , 44257
 # 1 , 57968
