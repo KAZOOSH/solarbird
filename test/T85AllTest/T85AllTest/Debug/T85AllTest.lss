@@ -3,31 +3,31 @@ T85AllTest.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000003ae  00000000  00000000  00000074  2**1
+  0 .text         000003e0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  00000422  2**0
+  1 .data         00000000  00800060  00800060  00000454  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000002  00800060  00800060  00000422  2**0
+  2 .bss          00000002  00800060  00800060  00000454  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000422  2**0
+  3 .comment      00000030  00000000  00000000  00000454  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000454  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000484  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000050  00000000  00000000  00000490  2**0
+  5 .debug_aranges 00000050  00000000  00000000  000004c0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000b85  00000000  00000000  000004e0  2**0
+  6 .debug_info   00000b95  00000000  00000000  00000510  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000060d  00000000  00000000  00001065  2**0
+  7 .debug_abbrev 0000060d  00000000  00000000  000010a5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000561  00000000  00000000  00001672  2**0
+  8 .debug_line   00000543  00000000  00000000  000016b2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000ac  00000000  00000000  00001bd4  2**2
+  9 .debug_frame  000000ac  00000000  00000000  00001bf8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000386  00000000  00000000  00001c80  2**0
+ 10 .debug_str    00000386  00000000  00000000  00001ca4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000055c  00000000  00000000  00002006  2**0
+ 11 .debug_loc    00000656  00000000  00000000  0000202a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000090  00000000  00000000  00002562  2**0
+ 12 .debug_ranges 000000f0  00000000  00000000  00002680  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -71,7 +71,7 @@ Disassembly of section .text:
   36:	b2 07       	cpc	r27, r18
   38:	e1 f7       	brne	.-8      	; 0x32 <.do_clear_bss_loop>
   3a:	8a d0       	rcall	.+276    	; 0x150 <main>
-  3c:	b6 c1       	rjmp	.+876    	; 0x3aa <_exit>
+  3c:	cf c1       	rjmp	.+926    	; 0x3dc <_exit>
 
 0000003e <__bad_interrupt>:
   3e:	e0 cf       	rjmp	.-64     	; 0x0 <__vectors>
@@ -381,27 +381,15 @@ int main(void)
  180:	f4 eb       	ldi	r31, 0xB4	; 180
  182:	df 2e       	mov	r13, r31
  184:	f0 2d       	mov	r31, r0
-			// make 10s noise filtered with 2 LFSR (flanger)
-			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
-			MYPORT |=  (1<<PIEPA);
-			MYPORT |=  (1<<PIEPB);
-			uint16_t lfsr_stateA = 44257; // Startwert für A
-			uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat 2,3ms Vorsprung vor A)
  186:	03 ea       	ldi	r16, 0xA3	; 163
  188:	14 e9       	ldi	r17, 0x94	; 148
-			
-			// make 10s noise filtered with 2 LFSR (flanger)
-			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
-			MYPORT |=  (1<<PIEPA);
-			MYPORT |=  (1<<PIEPB);
-			uint16_t lfsr_stateA = 44257; // Startwert für A
  18a:	d1 ee       	ldi	r29, 0xE1	; 225
  18c:	cc ea       	ldi	r28, 0xAC	; 172
-	init_wdt();
 		
 	// Job	
 	while(1) 
     {
+		// Test Light Sensors
 		if (wdtcnt == 1)
  18e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  192:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
@@ -433,24 +421,24 @@ int main(void)
  1c0:	81 e0       	ldi	r24, 0x01	; 1
  1c2:	e8 1a       	sub	r14, r24
  1c4:	f1 08       	sbc	r15, r1
-	// Job	
 	while(1) 
     {
+		// Test Light Sensors
 		if (wdtcnt == 1)
 		{
 			for (uint16_t i=0; i<1000; i++)
  1c6:	79 f7       	brne	.-34     	; 0x1a6 <main+0x56>
- 1c8:	e6 c0       	rjmp	.+460    	; 0x396 <__stack+0x137>
-			{
+ 1c8:	f1 c0       	rjmp	.+482    	; 0x3ac <__stack+0x14d>
 				piepsen(10, (5+(get_darkness()>>3)));
 			}			
 		}
-		// MAGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		// MAGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		else if (wdtcnt & 2U)
  1ca:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  1ce:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
  1d2:	81 ff       	sbrs	r24, 1
- 1d4:	6c c0       	rjmp	.+216    	; 0x2ae <__stack+0x4f>
+ 1d4:	77 c0       	rjmp	.+238    	; 0x2c4 <__stack+0x65>
 		{
 			// make 1s noise with LFSR
 			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
@@ -497,7 +485,7 @@ int main(void)
  20c:	94 7b       	andi	r25, 0xB4	; 180
  20e:	84 27       	eor	r24, r20
  210:	95 27       	eor	r25, r21
-				if (lfsr_state & 1)	MYPIN |= ((1<<PIEPB) | (1<<PIEPA));
+				if (lfsr_state & 1) MYPIN |= (1 << PIEPA) | (1 << PIEPB);
  212:	80 ff       	sbrs	r24, 0
  214:	03 c0       	rjmp	.+6      	; 0x21c <main+0xcc>
  216:	46 b3       	in	r20, 0x16	; 22
@@ -512,303 +500,333 @@ int main(void)
 			uint16_t lfsr_state = 1;
 			for (uint16_t i=0; i<44100; i++)
  220:	41 f7       	brne	.-48     	; 0x1f2 <main+0xa2>
-			{
 				_delay_us(23);
 				lfsr_state=(lfsr_state >> 1)^(-(lfsr_state & 1) & 0xB400u); // nach E.Galois
-				if (lfsr_state & 1)	MYPIN |= ((1<<PIEPB) | (1<<PIEPA));
+				if (lfsr_state & 1) MYPIN |= (1 << PIEPA) | (1 << PIEPB);
 			}
-			MYPORT &= ~((1<<PIEPA) | (1<<PIEPB));
- 222:	88 b3       	in	r24, 0x18	; 24
- 224:	87 7e       	andi	r24, 0xE7	; 231
- 226:	88 bb       	out	0x18, r24	; 24
-			// PINSTATE: booth piezopins are GND
 			
-			piepsen(1000, 5);
- 228:	65 e0       	ldi	r22, 0x05	; 5
- 22a:	70 e0       	ldi	r23, 0x00	; 0
- 22c:	88 ee       	ldi	r24, 0xE8	; 232
- 22e:	93 e0       	ldi	r25, 0x03	; 3
- 230:	15 df       	rcall	.-470    	; 0x5c <piepsen>
+			piepsen(250, 20);
+ 222:	64 e1       	ldi	r22, 0x14	; 20
+ 224:	70 e0       	ldi	r23, 0x00	; 0
+ 226:	8a ef       	ldi	r24, 0xFA	; 250
+ 228:	90 e0       	ldi	r25, 0x00	; 0
+ 22a:	18 df       	rcall	.-464    	; 0x5c <piepsen>
 			
-			// make 10s noise filtered with 2 LFSR (flanger)
+			// make noise filtered with 2 LFSR (flanger)
 			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
- 232:	87 b3       	in	r24, 0x17	; 23
- 234:	88 61       	ori	r24, 0x18	; 24
- 236:	87 bb       	out	0x17, r24	; 23
+ 22c:	87 b3       	in	r24, 0x17	; 23
+ 22e:	88 61       	ori	r24, 0x18	; 24
+ 230:	87 bb       	out	0x17, r24	; 23
 			MYPORT |=  (1<<PIEPA);
- 238:	c3 9a       	sbi	0x18, 3	; 24
-			MYPORT |=  (1<<PIEPB);
- 23a:	c4 9a       	sbi	0x18, 4	; 24
- 23c:	e8 ec       	ldi	r30, 0xC8	; 200
- 23e:	f0 e0       	ldi	r31, 0x00	; 0
-			uint16_t lfsr_stateA = 44257; // Startwert für A
-			uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat 2,3ms Vorsprung vor A)
- 240:	20 2f       	mov	r18, r16
- 242:	31 2f       	mov	r19, r17
-			
-			// make 10s noise filtered with 2 LFSR (flanger)
-			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
-			MYPORT |=  (1<<PIEPA);
-			MYPORT |=  (1<<PIEPB);
-			uint16_t lfsr_stateA = 44257; // Startwert für A
- 244:	8d 2f       	mov	r24, r29
- 246:	9c 2f       	mov	r25, r28
- 248:	2b c0       	rjmp	.+86     	; 0x2a0 <__stack+0x41>
- 24a:	6d e3       	ldi	r22, 0x3D	; 61
- 24c:	6a 95       	dec	r22
- 24e:	f1 f7       	brne	.-4      	; 0x24c <main+0xfc>
- 250:	00 00       	nop
-			{
-				for (uint16_t j=0; j<2205; j++)
+ 232:	c3 9a       	sbi	0x18, 3	; 24
+			MYPORT |=  (1<<PIEPB); // Differenz AB
+ 234:	c4 9a       	sbi	0x18, 4	; 24
+ 236:	a4 e0       	ldi	r26, 0x04	; 4
+ 238:	3a c0       	rjmp	.+116    	; 0x2ae <__stack+0x4f>
+ 23a:	4f 5f       	subi	r20, 0xFF	; 255
+ 23c:	5f 4f       	sbci	r21, 0xFF	; 255
+ 23e:	6d e3       	ldi	r22, 0x3D	; 61
+ 240:	6a 95       	dec	r22
+ 242:	f1 f7       	brne	.-4      	; 0x240 <main+0xf0>
+ 244:	00 00       	nop
 				{
-					_delay_us(23);
-					// nach E.Galois
-					lfsr_stateA=(lfsr_stateA >> 1)^(-(lfsr_stateA & 1) & 0xB400U);
- 252:	bc 01       	movw	r22, r24
- 254:	76 95       	lsr	r23
- 256:	67 95       	ror	r22
- 258:	81 70       	andi	r24, 0x01	; 1
- 25a:	99 27       	eor	r25, r25
- 25c:	91 95       	neg	r25
- 25e:	81 95       	neg	r24
- 260:	91 09       	sbc	r25, r1
- 262:	88 27       	eor	r24, r24
- 264:	94 7b       	andi	r25, 0xB4	; 180
- 266:	86 27       	eor	r24, r22
- 268:	97 27       	eor	r25, r23
-					// jedes 200te Sample verpennen (Abstand A B verkürzt sich zu 0 und wird wieder länger)
-					if (j != 1) lfsr_stateB=(lfsr_stateB >> 1)^(-(lfsr_stateB & 1) & 0xB400U);
- 26a:	41 30       	cpi	r20, 0x01	; 1
- 26c:	51 05       	cpc	r21, r1
- 26e:	61 f0       	breq	.+24     	; 0x288 <__stack+0x29>
- 270:	b9 01       	movw	r22, r18
- 272:	76 95       	lsr	r23
- 274:	67 95       	ror	r22
- 276:	21 70       	andi	r18, 0x01	; 1
- 278:	33 27       	eor	r19, r19
- 27a:	31 95       	neg	r19
- 27c:	21 95       	neg	r18
- 27e:	31 09       	sbc	r19, r1
- 280:	22 27       	eor	r18, r18
- 282:	34 7b       	andi	r19, 0xB4	; 180
- 284:	26 27       	eor	r18, r22
- 286:	37 27       	eor	r19, r23
-					// Mixer
-					if (lfsr_stateA & 1) MYPIN |= (1<<PIEPA);
- 288:	80 fd       	sbrc	r24, 0
- 28a:	b3 9a       	sbi	0x16, 3	; 22
-					if (lfsr_stateB & 1) MYPIN |= (1<<PIEPB);
- 28c:	20 fd       	sbrc	r18, 0
- 28e:	b4 9a       	sbi	0x16, 4	; 22
-			MYPORT |=  (1<<PIEPB);
-			uint16_t lfsr_stateA = 44257; // Startwert für A
-			uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat 2,3ms Vorsprung vor A)
-			for (uint16_t i=0; i<200; i++)
+					for (uint16_t k=0; k<1000; k++)
+					{
+						_delay_us(23);
+						// nach E.Galois
+						lfsr_stateA=(lfsr_stateA >> 1)^(-(lfsr_stateA & 1) & 0xB400U);
+ 246:	bc 01       	movw	r22, r24
+ 248:	76 95       	lsr	r23
+ 24a:	67 95       	ror	r22
+ 24c:	81 70       	andi	r24, 0x01	; 1
+ 24e:	99 27       	eor	r25, r25
+ 250:	91 95       	neg	r25
+ 252:	81 95       	neg	r24
+ 254:	91 09       	sbc	r25, r1
+ 256:	88 27       	eor	r24, r24
+ 258:	94 7b       	andi	r25, 0xB4	; 180
+ 25a:	86 27       	eor	r24, r22
+ 25c:	97 27       	eor	r25, r23
+						// jedes 1000te Sample verpennen (Abstand A B variiert 2,3ms....0....2,3ms)
+						if (k != 1) lfsr_stateB=(lfsr_stateB >> 1)^(-(lfsr_stateB & 1) & 0xB400U);
+ 25e:	42 30       	cpi	r20, 0x02	; 2
+ 260:	51 05       	cpc	r21, r1
+ 262:	09 f4       	brne	.+2      	; 0x266 <__stack+0x7>
+ 264:	ad c0       	rjmp	.+346    	; 0x3c0 <__stack+0x161>
+ 266:	b9 01       	movw	r22, r18
+ 268:	76 95       	lsr	r23
+ 26a:	67 95       	ror	r22
+ 26c:	21 70       	andi	r18, 0x01	; 1
+ 26e:	33 27       	eor	r19, r19
+ 270:	31 95       	neg	r19
+ 272:	21 95       	neg	r18
+ 274:	31 09       	sbc	r19, r1
+ 276:	22 27       	eor	r18, r18
+ 278:	34 7b       	andi	r19, 0xB4	; 180
+ 27a:	26 27       	eor	r18, r22
+ 27c:	37 27       	eor	r19, r23
+						// PowerMixer
+						MYPIN |= ((lfsr_stateA & 1) << PIEPA) | ((lfsr_stateB & 1) << PIEPB);
+ 27e:	b6 b3       	in	r27, 0x16	; 22
+ 280:	68 2f       	mov	r22, r24
+ 282:	61 70       	andi	r22, 0x01	; 1
+ 284:	66 0f       	add	r22, r22
+ 286:	66 0f       	add	r22, r22
+ 288:	66 0f       	add	r22, r22
+ 28a:	72 2f       	mov	r23, r18
+ 28c:	71 70       	andi	r23, 0x01	; 1
+ 28e:	72 95       	swap	r23
+ 290:	70 7f       	andi	r23, 0xF0	; 240
+ 292:	67 2b       	or	r22, r23
+ 294:	6b 2b       	or	r22, r27
+ 296:	66 bb       	out	0x16, r22	; 22
 			{
-				for (uint16_t j=0; j<2205; j++)
- 290:	4f 5f       	subi	r20, 0xFF	; 255
- 292:	5f 4f       	sbci	r21, 0xFF	; 255
- 294:	4d 39       	cpi	r20, 0x9D	; 157
- 296:	68 e0       	ldi	r22, 0x08	; 8
- 298:	56 07       	cpc	r21, r22
- 29a:	b9 f6       	brne	.-82     	; 0x24a <main+0xfa>
- 29c:	31 97       	sbiw	r30, 0x01	; 1
-			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
-			MYPORT |=  (1<<PIEPA);
-			MYPORT |=  (1<<PIEPB);
-			uint16_t lfsr_stateA = 44257; // Startwert für A
-			uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat 2,3ms Vorsprung vor A)
-			for (uint16_t i=0; i<200; i++)
- 29e:	19 f0       	breq	.+6      	; 0x2a6 <__stack+0x47>
+				uint16_t lfsr_stateA = 44257; // Startwert für A
+				uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat  hier 2,3ms Vorsprung vor A)
+				for (uint16_t j=0; j<200; j++)
+				{
+					for (uint16_t k=0; k<1000; k++)
+ 298:	48 3e       	cpi	r20, 0xE8	; 232
+ 29a:	63 e0       	ldi	r22, 0x03	; 3
+ 29c:	56 07       	cpc	r21, r22
+ 29e:	68 f2       	brcs	.-102    	; 0x23a <main+0xea>
+ 2a0:	31 97       	sbiw	r30, 0x01	; 1
+			//MYPORT &= ~(1<<PIEPB); // Summe AB alternativ
+			for (uint8_t i=0; i<4; i++)
+			{
+				uint16_t lfsr_stateA = 44257; // Startwert für A
+				uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat  hier 2,3ms Vorsprung vor A)
+				for (uint16_t j=0; j<200; j++)
+ 2a2:	19 f0       	breq	.+6      	; 0x2aa <__stack+0x4b>
 			MYPORT &= ~(1<<PIEPB);
 			uint16_t lfsr_state = 1;
 			for (uint16_t i=0; i<44100; i++)
 			{
 				_delay_us(23);
 				lfsr_state=(lfsr_state >> 1)^(-(lfsr_state & 1) & 0xB400u); // nach E.Galois
- 2a0:	40 e0       	ldi	r20, 0x00	; 0
- 2a2:	50 e0       	ldi	r21, 0x00	; 0
- 2a4:	d2 cf       	rjmp	.-92     	; 0x24a <main+0xfa>
-					// Mixer
-					if (lfsr_stateA & 1) MYPIN |= (1<<PIEPA);
-					if (lfsr_stateB & 1) MYPIN |= (1<<PIEPB);
+ 2a4:	41 e0       	ldi	r20, 0x01	; 1
+ 2a6:	50 e0       	ldi	r21, 0x00	; 0
+ 2a8:	ca cf       	rjmp	.-108    	; 0x23e <main+0xee>
+ 2aa:	a1 50       	subi	r26, 0x01	; 1
+			// make noise filtered with 2 LFSR (flanger)
+			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
+			MYPORT |=  (1<<PIEPA);
+			MYPORT |=  (1<<PIEPB); // Differenz AB
+			//MYPORT &= ~(1<<PIEPB); // Summe AB alternativ
+			for (uint8_t i=0; i<4; i++)
+ 2ac:	39 f0       	breq	.+14     	; 0x2bc <__stack+0x5d>
+			MYPORT &= ~(1<<PIEPB);
+			uint16_t lfsr_state = 1;
+			for (uint16_t i=0; i<44100; i++)
+			{
+				_delay_us(23);
+				lfsr_state=(lfsr_state >> 1)^(-(lfsr_state & 1) & 0xB400u); // nach E.Galois
+ 2ae:	e8 ec       	ldi	r30, 0xC8	; 200
+ 2b0:	f0 e0       	ldi	r31, 0x00	; 0
+ 2b2:	20 2f       	mov	r18, r16
+ 2b4:	31 2f       	mov	r19, r17
+ 2b6:	8d 2f       	mov	r24, r29
+ 2b8:	9c 2f       	mov	r25, r28
+ 2ba:	f4 cf       	rjmp	.-24     	; 0x2a4 <__stack+0x45>
+						// PowerMixer
+						MYPIN |= ((lfsr_stateA & 1) << PIEPA) | ((lfsr_stateB & 1) << PIEPB);
+					}
 				}
 			}
 			MYPORT &= ~((1<<PIEPA) | (1<<PIEPB));
- 2a6:	88 b3       	in	r24, 0x18	; 24
- 2a8:	87 7e       	andi	r24, 0xE7	; 231
- 2aa:	88 bb       	out	0x18, r24	; 24
- 2ac:	74 c0       	rjmp	.+232    	; 0x396 <__stack+0x137>
+ 2bc:	88 b3       	in	r24, 0x18	; 24
+ 2be:	87 7e       	andi	r24, 0xE7	; 231
+ 2c0:	88 bb       	out	0x18, r24	; 24
+ 2c2:	74 c0       	rjmp	.+232    	; 0x3ac <__stack+0x14d>
 			// PINSTATE: booth piezopins are GND
-		// MAGIC END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
-			
 		}
+		// MAGIC END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		
 		else if(wdtcnt & 4U)
- 2ae:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 2b2:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
- 2b6:	82 ff       	sbrs	r24, 2
- 2b8:	33 c0       	rjmp	.+102    	; 0x320 <__stack+0xc1>
+ 2c4:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2c8:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 2cc:	82 ff       	sbrs	r24, 2
+ 2ce:	33 c0       	rjmp	.+102    	; 0x336 <__stack+0xd7>
 		{
 			piepsen(1000, 5);
- 2ba:	65 e0       	ldi	r22, 0x05	; 5
- 2bc:	70 e0       	ldi	r23, 0x00	; 0
- 2be:	88 ee       	ldi	r24, 0xE8	; 232
- 2c0:	93 e0       	ldi	r25, 0x03	; 3
- 2c2:	cc de       	rcall	.-616    	; 0x5c <piepsen>
+ 2d0:	65 e0       	ldi	r22, 0x05	; 5
+ 2d2:	70 e0       	ldi	r23, 0x00	; 0
+ 2d4:	88 ee       	ldi	r24, 0xE8	; 232
+ 2d6:	93 e0       	ldi	r25, 0x03	; 3
+ 2d8:	c1 de       	rcall	.-638    	; 0x5c <piepsen>
 			piepsen(25, 200);
- 2c4:	68 ec       	ldi	r22, 0xC8	; 200
- 2c6:	70 e0       	ldi	r23, 0x00	; 0
- 2c8:	89 e1       	ldi	r24, 0x19	; 25
- 2ca:	90 e0       	ldi	r25, 0x00	; 0
- 2cc:	c7 de       	rcall	.-626    	; 0x5c <piepsen>
+ 2da:	68 ec       	ldi	r22, 0xC8	; 200
+ 2dc:	70 e0       	ldi	r23, 0x00	; 0
+ 2de:	89 e1       	ldi	r24, 0x19	; 25
+ 2e0:	90 e0       	ldi	r25, 0x00	; 0
+ 2e2:	bc de       	rcall	.-648    	; 0x5c <piepsen>
 			piepsen(50, 100);
- 2ce:	64 e6       	ldi	r22, 0x64	; 100
- 2d0:	70 e0       	ldi	r23, 0x00	; 0
- 2d2:	82 e3       	ldi	r24, 0x32	; 50
- 2d4:	90 e0       	ldi	r25, 0x00	; 0
- 2d6:	c2 de       	rcall	.-636    	; 0x5c <piepsen>
+ 2e4:	64 e6       	ldi	r22, 0x64	; 100
+ 2e6:	70 e0       	ldi	r23, 0x00	; 0
+ 2e8:	82 e3       	ldi	r24, 0x32	; 50
+ 2ea:	90 e0       	ldi	r25, 0x00	; 0
+ 2ec:	b7 de       	rcall	.-658    	; 0x5c <piepsen>
 			piepsen(100, 50);
- 2d8:	62 e3       	ldi	r22, 0x32	; 50
- 2da:	70 e0       	ldi	r23, 0x00	; 0
- 2dc:	84 e6       	ldi	r24, 0x64	; 100
- 2de:	90 e0       	ldi	r25, 0x00	; 0
- 2e0:	bd de       	rcall	.-646    	; 0x5c <piepsen>
+ 2ee:	62 e3       	ldi	r22, 0x32	; 50
+ 2f0:	70 e0       	ldi	r23, 0x00	; 0
+ 2f2:	84 e6       	ldi	r24, 0x64	; 100
+ 2f4:	90 e0       	ldi	r25, 0x00	; 0
+ 2f6:	b2 de       	rcall	.-668    	; 0x5c <piepsen>
 			piepsen(200, 25);
- 2e2:	69 e1       	ldi	r22, 0x19	; 25
- 2e4:	70 e0       	ldi	r23, 0x00	; 0
- 2e6:	88 ec       	ldi	r24, 0xC8	; 200
- 2e8:	90 e0       	ldi	r25, 0x00	; 0
- 2ea:	b8 de       	rcall	.-656    	; 0x5c <piepsen>
+ 2f8:	69 e1       	ldi	r22, 0x19	; 25
+ 2fa:	70 e0       	ldi	r23, 0x00	; 0
+ 2fc:	88 ec       	ldi	r24, 0xC8	; 200
+ 2fe:	90 e0       	ldi	r25, 0x00	; 0
+ 300:	ad de       	rcall	.-678    	; 0x5c <piepsen>
 			piepsen(500, 10);
- 2ec:	6a e0       	ldi	r22, 0x0A	; 10
- 2ee:	70 e0       	ldi	r23, 0x00	; 0
- 2f0:	84 ef       	ldi	r24, 0xF4	; 244
- 2f2:	91 e0       	ldi	r25, 0x01	; 1
- 2f4:	b3 de       	rcall	.-666    	; 0x5c <piepsen>
+ 302:	6a e0       	ldi	r22, 0x0A	; 10
+ 304:	70 e0       	ldi	r23, 0x00	; 0
+ 306:	84 ef       	ldi	r24, 0xF4	; 244
+ 308:	91 e0       	ldi	r25, 0x01	; 1
+ 30a:	a8 de       	rcall	.-688    	; 0x5c <piepsen>
 			piepsen(600, 8);
- 2f6:	68 e0       	ldi	r22, 0x08	; 8
- 2f8:	70 e0       	ldi	r23, 0x00	; 0
- 2fa:	88 e5       	ldi	r24, 0x58	; 88
- 2fc:	92 e0       	ldi	r25, 0x02	; 2
- 2fe:	ae de       	rcall	.-676    	; 0x5c <piepsen>
+ 30c:	68 e0       	ldi	r22, 0x08	; 8
+ 30e:	70 e0       	ldi	r23, 0x00	; 0
+ 310:	88 e5       	ldi	r24, 0x58	; 88
+ 312:	92 e0       	ldi	r25, 0x02	; 2
+ 314:	a3 de       	rcall	.-698    	; 0x5c <piepsen>
 			piepsen(700, 7);
- 300:	67 e0       	ldi	r22, 0x07	; 7
- 302:	70 e0       	ldi	r23, 0x00	; 0
- 304:	8c eb       	ldi	r24, 0xBC	; 188
- 306:	92 e0       	ldi	r25, 0x02	; 2
- 308:	a9 de       	rcall	.-686    	; 0x5c <piepsen>
+ 316:	67 e0       	ldi	r22, 0x07	; 7
+ 318:	70 e0       	ldi	r23, 0x00	; 0
+ 31a:	8c eb       	ldi	r24, 0xBC	; 188
+ 31c:	92 e0       	ldi	r25, 0x02	; 2
+ 31e:	9e de       	rcall	.-708    	; 0x5c <piepsen>
 			piepsen(800, 6);
- 30a:	66 e0       	ldi	r22, 0x06	; 6
- 30c:	70 e0       	ldi	r23, 0x00	; 0
- 30e:	80 e2       	ldi	r24, 0x20	; 32
- 310:	93 e0       	ldi	r25, 0x03	; 3
- 312:	a4 de       	rcall	.-696    	; 0x5c <piepsen>
+ 320:	66 e0       	ldi	r22, 0x06	; 6
+ 322:	70 e0       	ldi	r23, 0x00	; 0
+ 324:	80 e2       	ldi	r24, 0x20	; 32
+ 326:	93 e0       	ldi	r25, 0x03	; 3
+ 328:	99 de       	rcall	.-718    	; 0x5c <piepsen>
 			piepsen(1000, 5);
- 314:	65 e0       	ldi	r22, 0x05	; 5
- 316:	70 e0       	ldi	r23, 0x00	; 0
- 318:	88 ee       	ldi	r24, 0xE8	; 232
- 31a:	93 e0       	ldi	r25, 0x03	; 3
- 31c:	9f de       	rcall	.-706    	; 0x5c <piepsen>
- 31e:	3b c0       	rjmp	.+118    	; 0x396 <__stack+0x137>
+ 32a:	65 e0       	ldi	r22, 0x05	; 5
+ 32c:	70 e0       	ldi	r23, 0x00	; 0
+ 32e:	88 ee       	ldi	r24, 0xE8	; 232
+ 330:	93 e0       	ldi	r25, 0x03	; 3
+ 332:	94 de       	rcall	.-728    	; 0x5c <piepsen>
+ 334:	3b c0       	rjmp	.+118    	; 0x3ac <__stack+0x14d>
 		}
 		
 		else if (wdtcnt & 8U)
- 320:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 324:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
- 328:	83 ff       	sbrs	r24, 3
- 32a:	23 c0       	rjmp	.+70     	; 0x372 <__stack+0x113>
+ 336:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 33a:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 33e:	83 ff       	sbrs	r24, 3
+ 340:	23 c0       	rjmp	.+70     	; 0x388 <__stack+0x129>
 		{
 			piepsen(600, 40);
- 32c:	68 e2       	ldi	r22, 0x28	; 40
- 32e:	70 e0       	ldi	r23, 0x00	; 0
- 330:	88 e5       	ldi	r24, 0x58	; 88
- 332:	92 e0       	ldi	r25, 0x02	; 2
- 334:	93 de       	rcall	.-730    	; 0x5c <piepsen>
+ 342:	68 e2       	ldi	r22, 0x28	; 40
+ 344:	70 e0       	ldi	r23, 0x00	; 0
+ 346:	88 e5       	ldi	r24, 0x58	; 88
+ 348:	92 e0       	ldi	r25, 0x02	; 2
+ 34a:	88 de       	rcall	.-752    	; 0x5c <piepsen>
 			piepsen(800, 30);
- 336:	6e e1       	ldi	r22, 0x1E	; 30
- 338:	70 e0       	ldi	r23, 0x00	; 0
- 33a:	80 e2       	ldi	r24, 0x20	; 32
- 33c:	93 e0       	ldi	r25, 0x03	; 3
- 33e:	8e de       	rcall	.-740    	; 0x5c <piepsen>
+ 34c:	6e e1       	ldi	r22, 0x1E	; 30
+ 34e:	70 e0       	ldi	r23, 0x00	; 0
+ 350:	80 e2       	ldi	r24, 0x20	; 32
+ 352:	93 e0       	ldi	r25, 0x03	; 3
+ 354:	83 de       	rcall	.-762    	; 0x5c <piepsen>
 			piepsen(600, 40);
- 340:	68 e2       	ldi	r22, 0x28	; 40
- 342:	70 e0       	ldi	r23, 0x00	; 0
- 344:	88 e5       	ldi	r24, 0x58	; 88
- 346:	92 e0       	ldi	r25, 0x02	; 2
- 348:	89 de       	rcall	.-750    	; 0x5c <piepsen>
+ 356:	68 e2       	ldi	r22, 0x28	; 40
+ 358:	70 e0       	ldi	r23, 0x00	; 0
+ 35a:	88 e5       	ldi	r24, 0x58	; 88
+ 35c:	92 e0       	ldi	r25, 0x02	; 2
+ 35e:	7e de       	rcall	.-772    	; 0x5c <piepsen>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 34a:	8f ef       	ldi	r24, 0xFF	; 255
- 34c:	9b ed       	ldi	r25, 0xDB	; 219
- 34e:	25 e0       	ldi	r18, 0x05	; 5
- 350:	81 50       	subi	r24, 0x01	; 1
- 352:	90 40       	sbci	r25, 0x00	; 0
- 354:	20 40       	sbci	r18, 0x00	; 0
- 356:	e1 f7       	brne	.-8      	; 0x350 <__stack+0xf1>
- 358:	00 c0       	rjmp	.+0      	; 0x35a <__stack+0xfb>
- 35a:	00 00       	nop
+ 360:	8f ef       	ldi	r24, 0xFF	; 255
+ 362:	9b ed       	ldi	r25, 0xDB	; 219
+ 364:	25 e0       	ldi	r18, 0x05	; 5
+ 366:	81 50       	subi	r24, 0x01	; 1
+ 368:	90 40       	sbci	r25, 0x00	; 0
+ 36a:	20 40       	sbci	r18, 0x00	; 0
+ 36c:	e1 f7       	brne	.-8      	; 0x366 <__stack+0x107>
+ 36e:	00 c0       	rjmp	.+0      	; 0x370 <__stack+0x111>
+ 370:	00 00       	nop
 			_delay_ms(240);
 			piepsen(600, 40);
- 35c:	68 e2       	ldi	r22, 0x28	; 40
- 35e:	70 e0       	ldi	r23, 0x00	; 0
- 360:	88 e5       	ldi	r24, 0x58	; 88
- 362:	92 e0       	ldi	r25, 0x02	; 2
- 364:	7b de       	rcall	.-778    	; 0x5c <piepsen>
+ 372:	68 e2       	ldi	r22, 0x28	; 40
+ 374:	70 e0       	ldi	r23, 0x00	; 0
+ 376:	88 e5       	ldi	r24, 0x58	; 88
+ 378:	92 e0       	ldi	r25, 0x02	; 2
+ 37a:	70 de       	rcall	.-800    	; 0x5c <piepsen>
 			piepsen(800, 30);
- 366:	6e e1       	ldi	r22, 0x1E	; 30
- 368:	70 e0       	ldi	r23, 0x00	; 0
- 36a:	80 e2       	ldi	r24, 0x20	; 32
- 36c:	93 e0       	ldi	r25, 0x03	; 3
- 36e:	76 de       	rcall	.-788    	; 0x5c <piepsen>
- 370:	12 c0       	rjmp	.+36     	; 0x396 <__stack+0x137>
+ 37c:	6e e1       	ldi	r22, 0x1E	; 30
+ 37e:	70 e0       	ldi	r23, 0x00	; 0
+ 380:	80 e2       	ldi	r24, 0x20	; 32
+ 382:	93 e0       	ldi	r25, 0x03	; 3
+ 384:	6b de       	rcall	.-810    	; 0x5c <piepsen>
+ 386:	12 c0       	rjmp	.+36     	; 0x3ac <__stack+0x14d>
 			
 		}
 		
 		else if (wdtcnt & 16U)
- 372:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 376:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
- 37a:	84 ff       	sbrs	r24, 4
- 37c:	0c c0       	rjmp	.+24     	; 0x396 <__stack+0x137>
+ 388:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 38c:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 390:	84 ff       	sbrs	r24, 4
+ 392:	0c c0       	rjmp	.+24     	; 0x3ac <__stack+0x14d>
 		{
 			piepsen(300, 40);
- 37e:	68 e2       	ldi	r22, 0x28	; 40
- 380:	70 e0       	ldi	r23, 0x00	; 0
- 382:	8c e2       	ldi	r24, 0x2C	; 44
- 384:	91 e0       	ldi	r25, 0x01	; 1
- 386:	6a de       	rcall	.-812    	; 0x5c <piepsen>
+ 394:	68 e2       	ldi	r22, 0x28	; 40
+ 396:	70 e0       	ldi	r23, 0x00	; 0
+ 398:	8c e2       	ldi	r24, 0x2C	; 44
+ 39a:	91 e0       	ldi	r25, 0x01	; 1
+ 39c:	5f de       	rcall	.-834    	; 0x5c <piepsen>
 			flash_leds(get_darkness());
- 388:	8a de       	rcall	.-748    	; 0x9e <get_darkness>
- 38a:	b5 de       	rcall	.-662    	; 0xf6 <flash_leds>
+ 39e:	7f de       	rcall	.-770    	; 0x9e <get_darkness>
+ 3a0:	aa de       	rcall	.-684    	; 0xf6 <flash_leds>
 			piepsen(400, 30);
- 38c:	6e e1       	ldi	r22, 0x1E	; 30
- 38e:	70 e0       	ldi	r23, 0x00	; 0
- 390:	80 e9       	ldi	r24, 0x90	; 144
- 392:	91 e0       	ldi	r25, 0x01	; 1
- 394:	63 de       	rcall	.-826    	; 0x5c <piepsen>
+ 3a2:	6e e1       	ldi	r22, 0x1E	; 30
+ 3a4:	70 e0       	ldi	r23, 0x00	; 0
+ 3a6:	80 e9       	ldi	r24, 0x90	; 144
+ 3a8:	91 e0       	ldi	r25, 0x01	; 1
+ 3aa:	58 de       	rcall	.-848    	; 0x5c <piepsen>
 		}
 		else;
 		sei();
- 396:	78 94       	sei
+ 3ac:	78 94       	sei
 		sleep_mode();
- 398:	85 b7       	in	r24, 0x35	; 53
- 39a:	80 62       	ori	r24, 0x20	; 32
- 39c:	85 bf       	out	0x35, r24	; 53
- 39e:	88 95       	sleep
- 3a0:	85 b7       	in	r24, 0x35	; 53
- 3a2:	8f 7d       	andi	r24, 0xDF	; 223
- 3a4:	85 bf       	out	0x35, r24	; 53
+ 3ae:	85 b7       	in	r24, 0x35	; 53
+ 3b0:	80 62       	ori	r24, 0x20	; 32
+ 3b2:	85 bf       	out	0x35, r24	; 53
+ 3b4:	88 95       	sleep
+ 3b6:	85 b7       	in	r24, 0x35	; 53
+ 3b8:	8f 7d       	andi	r24, 0xDF	; 223
+ 3ba:	85 bf       	out	0x35, r24	; 53
 		cli();
- 3a6:	f8 94       	cli
+ 3bc:	f8 94       	cli
 	}
- 3a8:	f2 ce       	rjmp	.-540    	; 0x18e <main+0x3e>
+ 3be:	e7 ce       	rjmp	.-562    	; 0x18e <main+0x3e>
+						// nach E.Galois
+						lfsr_stateA=(lfsr_stateA >> 1)^(-(lfsr_stateA & 1) & 0xB400U);
+						// jedes 1000te Sample verpennen (Abstand A B variiert 2,3ms....0....2,3ms)
+						if (k != 1) lfsr_stateB=(lfsr_stateB >> 1)^(-(lfsr_stateB & 1) & 0xB400U);
+						// PowerMixer
+						MYPIN |= ((lfsr_stateA & 1) << PIEPA) | ((lfsr_stateB & 1) << PIEPB);
+ 3c0:	66 b3       	in	r22, 0x16	; 22
+ 3c2:	72 2f       	mov	r23, r18
+ 3c4:	71 70       	andi	r23, 0x01	; 1
+ 3c6:	72 95       	swap	r23
+ 3c8:	70 7f       	andi	r23, 0xF0	; 240
+ 3ca:	76 2b       	or	r23, r22
+ 3cc:	68 2f       	mov	r22, r24
+ 3ce:	61 70       	andi	r22, 0x01	; 1
+ 3d0:	66 0f       	add	r22, r22
+ 3d2:	66 0f       	add	r22, r22
+ 3d4:	66 0f       	add	r22, r22
+ 3d6:	67 2b       	or	r22, r23
+ 3d8:	66 bb       	out	0x16, r22	; 22
+ 3da:	2f cf       	rjmp	.-418    	; 0x23a <main+0xea>
 
-000003aa <_exit>:
- 3aa:	f8 94       	cli
+000003dc <_exit>:
+ 3dc:	f8 94       	cli
 
-000003ac <__stop_program>:
- 3ac:	ff cf       	rjmp	.-2      	; 0x3ac <__stop_program>
+000003de <__stop_program>:
+ 3de:	ff cf       	rjmp	.-2      	; 0x3de <__stop_program>

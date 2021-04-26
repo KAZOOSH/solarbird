@@ -156,6 +156,7 @@ int main(void)
 	// Job	
 	while(1) 
     {
+		// Test Light Sensors
 		if (wdtcnt == 1)
 		{
 			for (uint16_t i=0; i<1000; i++)
@@ -163,7 +164,8 @@ int main(void)
 				piepsen(10, (5+(get_darkness()>>3)));
 			}			
 		}
-		// MAGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		// MAGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		else if (wdtcnt & 2U)
 		{
 			// make 1s noise with LFSR
@@ -175,38 +177,38 @@ int main(void)
 			{
 				_delay_us(23);
 				lfsr_state=(lfsr_state >> 1)^(-(lfsr_state & 1) & 0xB400u); // nach E.Galois
-				if (lfsr_state & 1)	MYPIN |= ((1<<PIEPB) | (1<<PIEPA));
+				if (lfsr_state & 1) MYPIN |= (1 << PIEPA) | (1 << PIEPB);
 			}
-			MYPORT &= ~((1<<PIEPA) | (1<<PIEPB));
-			// PINSTATE: booth piezopins are GND
 			
-			piepsen(1000, 5);
+			piepsen(250, 20);
 			
-			// make 10s noise filtered with 2 LFSR (flanger)
+			// make noise filtered with 2 LFSR (flanger)
 			MYDDR  |=  ((1<<PIEPA) | (1<<PIEPB));
 			MYPORT |=  (1<<PIEPA);
-			MYPORT |=  (1<<PIEPB);
-			uint16_t lfsr_stateA = 44257; // Startwert für A
-			uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat 2,3ms Vorsprung vor A)
-			for (uint16_t i=0; i<200; i++)
+			MYPORT |=  (1<<PIEPB); // Differenz AB
+			//MYPORT &= ~(1<<PIEPB); // Summe AB alternativ
+			for (uint8_t i=0; i<4; i++)
 			{
-				for (uint16_t j=0; j<2205; j++)
+				uint16_t lfsr_stateA = 44257; // Startwert für A
+				uint16_t lfsr_stateB = 38051; // Wert 100 Schritte vor A (B hat  hier 2,3ms Vorsprung vor A)
+				for (uint16_t j=0; j<200; j++)
 				{
-					_delay_us(23);
-					// nach E.Galois
-					lfsr_stateA=(lfsr_stateA >> 1)^(-(lfsr_stateA & 1) & 0xB400U);
-					// jedes 200te Sample verpennen (Abstand A B verkürzt sich zu 0 und wird wieder länger)
-					if (j != 1) lfsr_stateB=(lfsr_stateB >> 1)^(-(lfsr_stateB & 1) & 0xB400U);
-					// Mixer
-					if (lfsr_stateA & 1) MYPIN |= (1<<PIEPA);
-					if (lfsr_stateB & 1) MYPIN |= (1<<PIEPB);
+					for (uint16_t k=0; k<1000; k++)
+					{
+						_delay_us(23);
+						// nach E.Galois
+						lfsr_stateA=(lfsr_stateA >> 1)^(-(lfsr_stateA & 1) & 0xB400U);
+						// jedes 1000te Sample verpennen (Abstand A B variiert 2,3ms....0....2,3ms)
+						if (k != 1) lfsr_stateB=(lfsr_stateB >> 1)^(-(lfsr_stateB & 1) & 0xB400U);
+						// PowerMixer
+						MYPIN |= ((lfsr_stateA & 1) << PIEPA) | ((lfsr_stateB & 1) << PIEPB);
+					}
 				}
 			}
 			MYPORT &= ~((1<<PIEPA) | (1<<PIEPB));
 			// PINSTATE: booth piezopins are GND
-		// MAGIC END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
-			
 		}
+		// MAGIC END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		
 		else if(wdtcnt & 4U)
 		{
