@@ -7,4 +7,5 @@ http://www.elektronik-labor.de/Notizen/Solarlampen.html
 https://www.elektronik-labor.de/Notizen/LEDwandler.html
 
 https://datasheetspdf.com/datasheet/YX8051.html
+https://oberguru.net/elektronik/led/step-up-wandler/qx5252/qx5252.html
 
