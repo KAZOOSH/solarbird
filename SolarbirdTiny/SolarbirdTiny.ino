@@ -36,7 +36,6 @@ void loop()
 	unsigned char newIndex = random( 0, Bird.numMelodies );
 	if ( newIndex == melodyStartIndex ) {
 		melodyStartIndex = newIndex + 2;
-		break;
 	}
 
 	// play 2-4 consecutive melodies
