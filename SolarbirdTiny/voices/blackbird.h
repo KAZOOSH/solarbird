@@ -1,3 +1,5 @@
+// nick@bitfasching.de, Kazoosh, 2021
+
 class Blackbird
 {
 	public:
