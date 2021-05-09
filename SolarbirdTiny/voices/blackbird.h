@@ -6,9 +6,12 @@ class Blackbird
 
 		static const unsigned char numMelodies = 6;
 
-		void static playSingleMelody( unsigned char melodySelector )
+		void static playSingleMelody( unsigned char melodySelector, bool lightLEDs=false )
 		{
 			Piezo::on();
+			if ( lightLEDs ) {
+				LEDs::on();
+			}
 
 			switch ( melodySelector )
 			{
@@ -95,9 +98,12 @@ class Blackbird
 			}
 
 			Piezo::off();
+			if ( lightLEDs ) {
+				LEDs::off();
+			}
 		}
 
-		void static play()
+		void static play( bool lightLEDs=false )
 		{
 			// initialize with an index that does not exist, see following if
 			static int melodyStartIndex = -1;
@@ -114,7 +120,7 @@ class Blackbird
 			// play 2-4 consecutive melodies
 			int count = random( 2, 4+1 );
 			for ( int i = 0; i < count; i++ ) {
-				playSingleMelody( (melodyStartIndex+i) % numMelodies );
+				playSingleMelody( (melodyStartIndex+i) % numMelodies, lightLEDs );
 				delay( 20 );
 			}
 		}

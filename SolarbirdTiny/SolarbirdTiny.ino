@@ -7,6 +7,8 @@
 #define PIN_LED_2_ANODE 1
 #define PIN_LED_CATHODES 2
 
+const bool lightLEDsWhenPlaying = true;
+
 
 // High-level IO //
 
@@ -27,11 +29,15 @@ void setup()
 	// wait to make sure programmer is high-Z
 	delay( 10 );
 
+	// startup test: flash LEDs
+	LEDs::on();
+	delay( 250 );
+	LEDs::off();
+	delay( 250 );
+
 	// startup test: play all melodies once with fixed delay in between
 	for ( int i = 0; i < Bird.numMelodies; i++ ) {
-		LEDs::on();
-		Bird.playSingleMelody( i );
-		LEDs::off();
+		Bird.playSingleMelody( i, lightLEDsWhenPlaying );
 		delay( 1000 );
 	}
 
@@ -44,9 +50,7 @@ void setup()
 void loop()
 {
 	// play melodies
-	LEDs::on();
-	Bird.play();
-	LEDs::off();
+	Bird.play( lightLEDsWhenPlaying );
 
 	// wait 1-5s
 	delay( random( 2000, 10000 ) );
