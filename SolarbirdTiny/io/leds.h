@@ -6,12 +6,17 @@ class LEDs
 
 		LEDs() {}
 
-		void static initOutput()
+		void static on()
 		{
 			// make pins outputs
 			bitWrite( DDRB, PIN_LED_1_ANODE, 1 );
 			bitWrite( DDRB, PIN_LED_2_ANODE, 1 );
 			bitWrite( DDRB, PIN_LED_CATHODES, 1 );
+
+			// drive cathodes low and anodes high
+			bitWrite( PORTB, PIN_LED_CATHODES, 0 );
+			bitWrite( PORTB, PIN_LED_1_ANODE, 1 );
+			bitWrite( PORTB, PIN_LED_1_ANODE, 1 );
 		}
 
 		void static off()

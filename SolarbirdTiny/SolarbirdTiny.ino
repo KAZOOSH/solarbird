@@ -24,6 +24,19 @@ Blackbird Bird;
 
 void setup()
 {
+	// wait to make sure programmer is high-Z
+	delay( 10 );
+
+	// startup test: play all melodies once with fixed delay in between
+	for ( int i = 0; i < Bird.numMelodies; i++ ) {
+		LEDs::on();
+		Bird.playMelody( i );
+		LEDs::off();
+		delay( 1000 );
+	}
+
+	// initialize random number generator with external source of randomness
+	delay( 1000 );
 	pinMode( PIN_PIEZO_A, INPUT );
 	randomSeed( analogRead( PIN_PIEZO_A ) );
 }
@@ -44,7 +57,9 @@ void loop()
 	// play 2-4 consecutive melodies
 	int count = random( 2, 4+1 );
 	for ( int i = 0; i < count; i++ ) {
+		LEDs::on();
 		Bird.playMelody( (melodyStartIndex+i) % Bird.numMelodies );
+		LEDs::off();
 		delay( random( 0, 100 ) );
 	}
 
