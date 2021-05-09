@@ -60,7 +60,7 @@ void loop()
 		LEDs::on();
 		Bird.playMelody( (melodyStartIndex+i) % Bird.numMelodies );
 		LEDs::off();
-		delay( random( 0, 100 ) );
+		delay( 20 );
 	}
 
 	// wait 1-5s
