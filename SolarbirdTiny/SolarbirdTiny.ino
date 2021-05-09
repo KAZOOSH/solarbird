@@ -55,7 +55,7 @@ void loop()
 	}
 
 	// play 2-4 consecutive melodies
-	int count = random( 2, 4+1 );
+	int count = random( 2, 3+1 );
 	for ( int i = 0; i < count; i++ ) {
 		LEDs::on();
 		Bird.playMelody( (melodyStartIndex+i) % Bird.numMelodies );
@@ -64,5 +64,5 @@ void loop()
 	}
 
 	// wait 1-5s
-	delay( random( 1000, 5000 ) );
+	delay( random( 2000, 10000 ) );
 }
