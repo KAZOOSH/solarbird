@@ -10,10 +10,10 @@
 const bool lightLEDsWhenPlaying = true;
 
 
-// High-level IO //
+// High-level access of I/O and system features //
 
-#include "io/leds.h"
-#include "io/piezo.h"
+#include "system/leds.h"
+#include "system/piezo.h"
 
 
 // Bird voices //
