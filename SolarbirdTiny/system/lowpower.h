@@ -9,6 +9,7 @@ class LowPower
 		void static sleepOneSecond()
 		{
 			// initialize watchdog timer to wake up after one second
+			// 8.5.2 (page 45) in datasheet: http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf
 			WDTCR |= ( (1<<WDIE) | (1<<WDP2) | (1<<WDP1) );
 			WDTCR &= ~(1<<WDE);
 			interrupts();
@@ -24,6 +25,15 @@ class LowPower
 			WDTCR |= ( (1<<WDCE) | (1<<WDE) );
 			WDTCR = 0x00;
 			interrupts();
+		}
+
+		void static sleepSeconds( int seconds )
+		{
+			while( seconds > 0 )
+			{
+				sleepOneSecond();
+				seconds--;
+			}
 		}
 };
 

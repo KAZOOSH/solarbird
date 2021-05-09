@@ -54,8 +54,5 @@ void loop()
 	Bird.play( lightLEDsWhenPlaying );
 
 	// wait 1-10s
-	int seconds = random( 1, 10+1 );
-	for ( int i = 0; i < seconds; i++ ) {
-		LowPower::sleepOneSecond();
-	}
+	LowPower::sleepSeconds( random( 1, 10+1 ) );
 }
