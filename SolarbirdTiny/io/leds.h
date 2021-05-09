@@ -22,8 +22,13 @@ class LEDs
 		void static off()
 		{
 			// drive all pins low = LEDs off
-			digitalWrite( PIN_LED_1_ANODE, LOW );
-			digitalWrite( PIN_LED_2_ANODE, LOW );
-			digitalWrite( PIN_LED_CATHODES, LOW );
+			bitWrite( PORTB, PIN_LED_CATHODES, 0 );
+			bitWrite( PORTB, PIN_LED_1_ANODE, 0 );
+			bitWrite( PORTB, PIN_LED_1_ANODE, 0 );
+
+			// make pins inputs (disconnect)
+			bitWrite( DDRB, PIN_LED_1_ANODE, 0 );
+			bitWrite( DDRB, PIN_LED_2_ANODE, 0 );
+			bitWrite( DDRB, PIN_LED_CATHODES, 0 );
 		}
 };
