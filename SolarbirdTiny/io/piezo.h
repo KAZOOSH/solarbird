@@ -26,8 +26,9 @@ class Piezo
 
 		void static inline toggle()
 		{
-			// Atmel special feature: writing to PINx is the fastest way to toggle outputs
-			PINB |= ( 1<<PIN_PIEZO_A | 1<<PIN_PIEZO_B );
+			// invert A and B
+			bitWrite( PORTB, PIN_PIEZO_A, !bitRead( PORTB, PIN_PIEZO_A ) );
+			bitWrite( PORTB, PIN_PIEZO_B, !bitRead( PORTB, PIN_PIEZO_B ) );
 		}
 
 		void static tone( unsigned long tonePeriod, unsigned long durationMicros )
