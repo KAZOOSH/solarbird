@@ -10,10 +10,11 @@
 const bool lightLEDsWhenPlaying = true;
 
 
-// High-level access of I/O and system features //
+// High-level access to I/O and system features //
 
 #include "system/leds.h"
 #include "system/piezo.h"
+#include "system/lowpower.h"
 
 
 // Bird voices //
@@ -52,6 +53,9 @@ void loop()
 	// play melodies
 	Bird.play( lightLEDsWhenPlaying );
 
-	// wait 1-5s
-	delay( random( 2000, 10000 ) );
+	// wait 1-10s
+	int seconds = random( 1, 10+1 );
+	for ( int i = 0; i < seconds; i++ ) {
+		LowPower::sleepOneSecond();
+	}
 }
