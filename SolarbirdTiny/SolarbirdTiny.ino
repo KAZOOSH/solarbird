@@ -30,7 +30,7 @@ void setup()
 	// startup test: play all melodies once with fixed delay in between
 	for ( int i = 0; i < Bird.numMelodies; i++ ) {
 		LEDs::on();
-		Bird.playMelody( i );
+		Bird.playSingleMelody( i );
 		LEDs::off();
 		delay( 1000 );
 	}
@@ -43,25 +43,10 @@ void setup()
 
 void loop()
 {
-	static int melodyStartIndex = -1;
-
-	// get new start index that is different from last one
-	int newIndex = random( 0, Bird.numMelodies );
-	if ( newIndex == melodyStartIndex ) {
-		melodyStartIndex = newIndex + 2;
-	}
-	else {
-		melodyStartIndex = newIndex;
-	}
-
-	// play 2-4 consecutive melodies
-	int count = random( 2, 4+1 );
-	for ( int i = 0; i < count; i++ ) {
-		LEDs::on();
-		Bird.playMelody( (melodyStartIndex+i) % Bird.numMelodies );
-		LEDs::off();
-		delay( 20 );
-	}
+	// play melodies
+	LEDs::on();
+	Bird.play();
+	LEDs::off();
 
 	// wait 1-5s
 	delay( random( 2000, 10000 ) );

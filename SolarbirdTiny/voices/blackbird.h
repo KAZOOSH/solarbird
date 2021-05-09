@@ -6,7 +6,7 @@ class Blackbird
 
 		static const unsigned char numMelodies = 6;
 
-		void static playMelody( unsigned char melodySelector )
+		void static playSingleMelody( unsigned char melodySelector )
 		{
 			Piezo::on();
 
@@ -42,13 +42,13 @@ class Blackbird
 					Piezo::chirp( 1E6/2800, 1E6/2200, 2 );
 					for ( int i = 0; i < 2; i++ ) {
 						Piezo::chirp( 1E6/2300, 1E6/2900, 4 );
-						Piezo::chirp( 1E6/2900, 1E6/2300, 2 );
+						Piezo::chirp( 1E6/2900, 1E6/2300, 3 );
 					}
-					for ( int i = 0; i < 2; i++ ) {
-						Piezo::chirp( 1E6/2400, 1E6/3000, 2 );
+					for ( int i = 0; i < 3; i++ ) {
+						Piezo::chirp( 1E6/2400, 1E6/3000, 3 );
 						Piezo::chirp( 1E6/3000, 1E6/2400, 3 );
 					}
-					for ( int i = 0; i < 5; i++ ) {
+					for ( int i = 0; i < 6; i++ ) {
 						Piezo::chirp( 1E6/2500, 1E6/2900, 4 );
 						Piezo::chirp( 1E6/2900, 1E6/2500, 6 );
 					}
@@ -95,5 +95,27 @@ class Blackbird
 			}
 
 			Piezo::off();
+		}
+
+		void static play()
+		{
+			// initialize with an index that does not exist, see following if
+			static int melodyStartIndex = -1;
+
+			// get new start index that is different from last one
+			int newIndex = random( 0, numMelodies );
+			if ( newIndex == melodyStartIndex ) {
+				melodyStartIndex = newIndex + 2;
+			}
+			else {
+				melodyStartIndex = newIndex;
+			}
+
+			// play 2-4 consecutive melodies
+			int count = random( 2, 4+1 );
+			for ( int i = 0; i < count; i++ ) {
+				playSingleMelody( (melodyStartIndex+i) % numMelodies );
+				delay( 20 );
+			}
 		}
 };
