@@ -34,7 +34,7 @@ void setup()
 	LEDs::on();
 	delay( 250 );
 	LEDs::off();
-	delay( 250 );
+	delay( 500 );
 
 	// startup test: play all melodies once with fixed delay in between
 	for ( int i = 0; i < Bird.numMelodies; i++ ) {
@@ -42,10 +42,11 @@ void setup()
 		delay( 1000 );
 	}
 
-	// initialize random number generator with external source of randomness
 	delay( 1000 );
-	pinMode( PIN_PIEZO_A, INPUT );
-	randomSeed( analogRead( PIN_PIEZO_A ) );
+
+	// initialize random number generator with external source of randomness
+	pinMode( PIN_LED_1_ANODE, INPUT ); delay( 10 );
+	randomSeed( analogRead( PIN_LED_1_ANODE ) );
 }
 
 void loop()
