@@ -43,10 +43,10 @@ void setup()
 
 void loop()
 {
-	static unsigned char melodyStartIndex = -1;
+	static int melodyStartIndex = -1;
 
 	// get new start index that is different from last one
-	unsigned char newIndex = random( 0, Bird.numMelodies );
+	int newIndex = random( 0, Bird.numMelodies );
 	if ( newIndex == melodyStartIndex ) {
 		melodyStartIndex = newIndex + 2;
 	}
