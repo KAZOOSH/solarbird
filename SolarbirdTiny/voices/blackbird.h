@@ -38,17 +38,15 @@ class Blackbird
 					break;
 
 				case 2:
-					for ( int i = 0; i < 2; i++ ) {
-						Piezo::chirp( 1E6/2200, 1E6/2800, 4 );
-						Piezo::chirp( 1E6/2800, 1E6/2200, 2 );
-					}
+					Piezo::chirp( 1E6/2200, 1E6/2800, 4 );
+					Piezo::chirp( 1E6/2800, 1E6/2200, 2 );
 					for ( int i = 0; i < 2; i++ ) {
 						Piezo::chirp( 1E6/2300, 1E6/2900, 4 );
 						Piezo::chirp( 1E6/2900, 1E6/2300, 2 );
 					}
-					for ( int i = 0; i < 3; i++ ) {
+					for ( int i = 0; i < 2; i++ ) {
 						Piezo::chirp( 1E6/2400, 1E6/3000, 2 );
-						Piezo::chirp( 1E6/3000, 1E6/2400, 2 );
+						Piezo::chirp( 1E6/3000, 1E6/2400, 3 );
 					}
 					for ( int i = 0; i < 5; i++ ) {
 						Piezo::chirp( 1E6/2500, 1E6/2900, 4 );
@@ -66,7 +64,7 @@ class Blackbird
 					for ( int i = 0; i < 4; i++ ) {
 						Piezo::chirp( 1E6/3100, 1E6/3600, 4 );
 					}
-					for ( int i = 0; i < 4; i++ ) {
+					for ( int i = 0; i < 3; i++ ) {
 						Piezo::chirp( 1E6/3000, 1E6/3600, 1 );
 						Piezo::chirp( 1E6/3600, 1E6/3000, 2 );
 					}
