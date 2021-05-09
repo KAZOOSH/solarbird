@@ -37,6 +37,9 @@ void loop()
 	if ( newIndex == melodyStartIndex ) {
 		melodyStartIndex = newIndex + 2;
 	}
+	else {
+		melodyStartIndex = newIndex;
+	}
 
 	// play 2-4 consecutive melodies
 	int count = random( 2, 4+1 );
