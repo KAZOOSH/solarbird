@@ -1,7 +1,7 @@
 # solaranimals
 zwitschernde Tiere zur Woche des guten Lebens 2021
 
-## How to flash SolarbirdTiny.ino
+## How to flash SolarbirdTiny.ino with Arduino IDE
 
 - Get an AVR ISP programmer or a spare Arduino and follow [these instructions](https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829).
 - Set the fuses:
