@@ -12,7 +12,7 @@ class Blackbird
 		{
 			Piezo::on();
 			if ( lightLEDs ) {
-				LEDs::on();
+				LEDs::glow();
 			}
 
 			switch ( melodySelector )
