@@ -29,13 +29,14 @@ Blackbird Bird;
 void setup()
 {
 	// wait to make sure programmer is high-Z
-	delay( 10 );
+	// and be gentle with the power source
+	delay( 100 );
 
 	if ( runStartupTest )
 	{
 		// startup test: flash LEDs
 		LEDs::on();
-		delay( 250 );
+		delay( 50 );
 		LEDs::off();
 		delay( 500 );
 
