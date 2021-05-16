@@ -5,14 +5,12 @@ class LEDs
 	public:
 
 		LEDs() {}
-		
-		void static glow() // low current
+
+		void static on()
 		{
-			// use pullup as additional LED series resistor
-			bitWrite( DDRB, PIN_LED_1_ANODE, 0 );
-			bitWrite( DDRB, PIN_LED_2_ANODE, 0 );
-			
-			// make pin output
+			// make pins outputs
+			bitWrite( DDRB, PIN_LED_1_ANODE, 1 );
+			bitWrite( DDRB, PIN_LED_2_ANODE, 1 );
 			bitWrite( DDRB, PIN_LED_CATHODES, 1 );
 
 			// drive cathodes low and anodes high
@@ -20,13 +18,15 @@ class LEDs
 			bitWrite( PORTB, PIN_LED_1_ANODE, 1 );
 			bitWrite( PORTB, PIN_LED_2_ANODE, 1 );
 		}
-		
 
-		void static on()
+		// low current, use pullup as additional LED series resistor
+		void static glow()
 		{
-			// make pins outputs
-			bitWrite( DDRB, PIN_LED_1_ANODE, 1 );
-			bitWrite( DDRB, PIN_LED_2_ANODE, 1 );
+			// make anodes pins inputs (writing to PORTB will only enable internal pullup)
+			bitWrite( DDRB, PIN_LED_1_ANODE, 0 );
+			bitWrite( DDRB, PIN_LED_2_ANODE, 0 );
+
+			// make cathodes pin output
 			bitWrite( DDRB, PIN_LED_CATHODES, 1 );
 
 			// drive cathodes low and anodes high
