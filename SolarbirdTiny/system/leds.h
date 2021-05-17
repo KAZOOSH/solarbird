@@ -48,7 +48,7 @@ class LEDs
 			bitWrite( DDRB, PIN_LED_CATHODES, 0 );
 		}
 
-		unsigned long static senseBrightness( const unsigned long dischargeTimeWindowMillis=300UL )
+		unsigned int static senseBrightness( const unsigned int dischargeTimeWindowCycles=65536UL-1 )
 		{
 			// make pins outputs
 			bitWrite( DDRB, PIN_LED_1_ANODE, 1 );
@@ -63,29 +63,26 @@ class LEDs
 			// wait to charge
 			delay( 1 );
 
+			unsigned int dischargeCycles = dischargeTimeWindowCycles;
+
 			// change anodes to inputs (start discharging towards potential of cathodes)
 			bitWrite( DDRB, PIN_LED_1_ANODE, 0 );
 			bitWrite( DDRB, PIN_LED_2_ANODE, 0 );
 
 			// count time until potential of anodes is high
-			unsigned long dischargeStartMillis = millis();
-			unsigned long dischargeMillis = 0;
-			bool dischargedInTime = false;
-			while ( dischargeMillis <= dischargeTimeWindowMillis ) {
-				dischargeMillis = millis()-dischargeStartMillis;
+			noInterrupts();
+			while ( dischargeCycles > 0 ) {
 				if ( bitRead( PINB, PIN_LED_1_ANODE ) || bitRead( PINB, PIN_LED_2_ANODE ) ) {
-					dischargedInTime = true;
 					break;
 				}
+				dischargeCycles--;
 			}
-			if ( !dischargedInTime ) {
-				dischargeMillis = dischargeTimeWindowMillis;
-			}
+			interrupts();
 
 			// restore LED state
 			off();
 
 			// discharge time is inverse proportional to brightness
-			return dischargeTimeWindowMillis - dischargeMillis;
+			return -dischargeCycles - 1;
 		}
 };
