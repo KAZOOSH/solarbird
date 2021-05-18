@@ -57,8 +57,8 @@ void setup()
 	}
 
 	// initialize random number generator with external source of randomness
-	pinMode( PIN_LED_1_ANODE, INPUT ); delay( 10 );
-	randomSeed( analogRead( PIN_LED_1_ANODE ) );
+	pinMode( PIN_LED_1_ANODE, INPUT ); pinMode( PIN_LED_2_ANODE, INPUT );
+	randomSeed( analogRead( PIN_LED_1_ANODE ) ^ analogRead( PIN_LED_2_ANODE ) );
 }
 
 void loop()
