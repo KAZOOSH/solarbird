@@ -9,11 +9,13 @@
 
 const bool runStartupTest = false;
 const bool lightLEDsWhenPlaying = true;
-const int activityMaximum = 8;
+const int activityMaximum = 8; // should be divisible by the difference of activeSoundInterval*
 const int activeSoundIntervalMinimum = 1;
-const int activeSoundIntervalMaximum = 5;
-const int idleSoundIntervalMinimum = 60*45;
-const int idleSoundIntervalMaximum = 60*90;
+const int activeSoundIntervalMaximum = 5; // should be a power of 2 greater than the minimum
+const int idleDaySoundIntervalMinimum = 60*20;
+const int idleDaySoundIntervalMaximum = 60*40;
+const int idleNightSoundIntervalMinimum = 60*60*7; // all intervals must be smaller than 32768
+const int idleNightSoundIntervalMaximum = 60*60*9;
 
 
 // High-level access to I/O and system features //
@@ -69,6 +71,9 @@ void loop()
 	// measure current brightness (logarithmic value, proportional to order of magnitude)
 	int brightness = LEDs::senseBrightness();
 
+	// determine if in darkness (i.e., night mode)
+	bool dark = lastBrightness == 0 && brightness == 0;
+
 	// compare with previous brightness (don't care for sign) and save for next cycle
 	int brightnessActivity = abs( lastBrightness - brightness );
 	lastBrightness = brightness;
@@ -117,7 +122,16 @@ void loop()
 		}
 		else
 		{
-			cyclesBeforeNextSound = random( idleSoundIntervalMinimum, idleSoundIntervalMaximum+1 );
+			if ( dark )
+			{
+				// night mode
+				cyclesBeforeNextSound = random( idleNightSoundIntervalMinimum, idleNightSoundIntervalMaximum+1 );
+			}
+			else
+			{
+				// day mode
+				cyclesBeforeNextSound = random( idleDaySoundIntervalMinimum, idleDaySoundIntervalMaximum+1 );
+			}
 		}
 	}
 	else
