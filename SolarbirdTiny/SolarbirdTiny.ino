@@ -7,8 +7,13 @@
 #define PIN_LED_2_ANODE 1
 #define PIN_LED_CATHODES 2
 
-const bool runStartupTest = true;
+const bool runStartupTest = false;
 const bool lightLEDsWhenPlaying = true;
+const int activityMaximum = 8;
+const int activeSoundIntervalMinimum = 1;
+const int activeSoundIntervalMaximum = 5;
+const int idleSoundIntervalMinimum = 60*45;
+const int idleSoundIntervalMaximum = 60*90;
 
 
 // High-level access to I/O and system features //
@@ -56,9 +61,92 @@ void setup()
 
 void loop()
 {
-	// play melodies
-	Bird.play( lightLEDsWhenPlaying );
+	static int activity = 0;
+	static bool active = false;
+	static int cyclesBeforeNextSound = 0;
 
-	// wait 2-20s
-	LowPower::sleepSeconds( random( 2, 20+1 ) );
+	// sense environment and accumulate activity within limit
+	activity = activity + getNewActivity();
+	activity = min( activityMaximum, activity );
+
+	// true if just became active in current cycle
+	bool justBecameActive = false;
+
+	// sensed activity?
+	if ( activity > 0 )
+	{
+		// flash LEDs, the more activity the longer
+		LEDs::on();
+		delay( activity * 2 );
+		LEDs::off();
+
+		// just became active?
+		if ( !active )
+		{
+			// set flag and remember active state
+			justBecameActive = true;
+			active = true;
+		}
+	}
+	else
+	{
+		// clear active state
+		active = false;
+	}
+
+	// time to make noise?
+	// either after scheduled interval or on transition from idle to active
+	if ( cyclesBeforeNextSound == 0 || justBecameActive )
+	{
+		// play sound
+		Bird.play( lightLEDsWhenPlaying );
+
+		// determine waiting time before next sound (both for active and idle case)
+		if ( activity > 0 )
+		{
+			// active case = mapping of max activity to min interval plus one cycle of randomness
+			cyclesBeforeNextSound = (activityMaximum-activity) * (activeSoundIntervalMaximum-activeSoundIntervalMinimum) / activityMaximum + activeSoundIntervalMinimum + random( 0, 1+1 );
+		}
+		else
+		{
+			cyclesBeforeNextSound = random( idleSoundIntervalMinimum, idleSoundIntervalMaximum+1 );
+		}
+	}
+	else
+	{
+		// decrease counter
+		cyclesBeforeNextSound--;
+	}
+
+	// decrease activity level
+	if ( activity > 0 ) { activity--; }
+
+	// wait one second until next cycle
+	LowPower::sleepOneSecond();
+}
+
+
+// Activity sensing //
+
+int getNewActivity()
+{
+	static int lastBrightnessPowerOfTwo = 0;
+
+	// measure raw brightness
+	unsigned int rawBrightness = LEDs::senseBrightness();
+
+	// poor man's logarithm: shift until remainder is 1 -> floor(log(x,2))
+	int powerOfTwo = 0;
+	while ( rawBrightness > 1 ) {
+		rawBrightness = rawBrightness >> 1;
+		powerOfTwo++;
+	}
+
+	// compare with previous brightness, absolute value of difference is activity
+	int difference = abs( lastBrightnessPowerOfTwo - powerOfTwo );
+
+	// save current brightness power of two
+	lastBrightnessPowerOfTwo = powerOfTwo;
+
+	return difference;
 }
