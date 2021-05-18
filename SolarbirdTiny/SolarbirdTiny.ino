@@ -130,23 +130,17 @@ void loop()
 
 int getNewActivity()
 {
-	static int lastBrightnessPowerOfTwo = 0;
+	static int lastBrightness = 0;
 
-	// measure raw brightness
-	unsigned int rawBrightness = LEDs::senseBrightness();
+	// measure current brightness (logarithmic value, proportional to order of magnitude)
+	int brightness = LEDs::senseBrightness();
 
-	// poor man's logarithm: shift until remainder is 1 -> floor(log(x,2))
-	int powerOfTwo = 0;
-	while ( rawBrightness > 1 ) {
-		rawBrightness = rawBrightness >> 1;
-		powerOfTwo++;
-	}
+	// compare with previous brightness (don't care for sign)
+	int difference = abs( lastBrightness - brightness );
 
-	// compare with previous brightness, absolute value of difference is activity
-	int difference = abs( lastBrightnessPowerOfTwo - powerOfTwo );
+	// save current brightness
+	lastBrightness = brightness;
 
-	// save current brightness power of two
-	lastBrightnessPowerOfTwo = powerOfTwo;
-
+	// new activity = difference in order of magnitude
 	return difference;
 }

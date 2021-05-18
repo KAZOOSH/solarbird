@@ -6,6 +6,9 @@ class LEDs
 
 		LEDs() {}
 
+		static const unsigned int maxRawBrightness = 65535U;
+		static const unsigned int maxBrightness = 15;
+
 		void static on()
 		{
 			// make pins outputs
@@ -48,7 +51,7 @@ class LEDs
 			bitWrite( DDRB, PIN_LED_CATHODES, 0 );
 		}
 
-		unsigned int static senseBrightness( const unsigned int dischargeTimeWindowCycles=65535U )
+		unsigned int static senseRawBrightness( const unsigned int dischargeTimeWindowCycles=maxRawBrightness )
 		{
 			// make pins outputs
 			bitWrite( DDRB, PIN_LED_1_ANODE, 1 );
@@ -89,5 +92,22 @@ class LEDs
 			off();
 
 			return dischargeCycles;
+		}
+
+		int static senseBrightness( const unsigned int dischargeTimeWindowCycles=maxRawBrightness )
+		{
+			// measure raw brightness and compute complement (i.e., low values map to high brightness)
+			unsigned int rawDarkness = maxRawBrightness - senseRawBrightness();
+
+			// poor man's logarithm: shift until remainder is 1 -> floor(log(x,2))
+			int powerOfTwo = 0;
+			unsigned int shifted = rawDarkness;
+			while ( shifted > 1 ) {
+				shifted = shifted >> 1;
+				powerOfTwo++;
+			}
+
+			// complement again to have a value that increases for higher brightness
+			return maxBrightness-powerOfTwo;
 		}
 };
