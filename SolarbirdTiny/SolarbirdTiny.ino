@@ -61,12 +61,20 @@ void setup()
 
 void loop()
 {
+	static int lastBrightness = 0;
 	static int activity = 0;
 	static bool active = false;
 	static int cyclesBeforeNextSound = 0;
 
-	// sense environment and accumulate activity within limit
-	activity = activity + getNewActivity();
+	// measure current brightness (logarithmic value, proportional to order of magnitude)
+	int brightness = LEDs::senseBrightness();
+
+	// compare with previous brightness (don't care for sign) and save for next cycle
+	int brightnessActivity = abs( lastBrightness - brightness );
+	lastBrightness = brightness;
+
+	// accumulate activity within limit
+	activity = activity + brightnessActivity;
 	activity = min( activityMaximum, activity );
 
 	// true if just became active in current cycle
@@ -123,24 +131,4 @@ void loop()
 
 	// wait one second until next cycle
 	LowPower::sleepOneSecond();
-}
-
-
-// Activity sensing //
-
-int getNewActivity()
-{
-	static int lastBrightness = 0;
-
-	// measure current brightness (logarithmic value, proportional to order of magnitude)
-	int brightness = LEDs::senseBrightness();
-
-	// compare with previous brightness (don't care for sign)
-	int difference = abs( lastBrightness - brightness );
-
-	// save current brightness
-	lastBrightness = brightness;
-
-	// new activity = difference in order of magnitude
-	return difference;
 }
