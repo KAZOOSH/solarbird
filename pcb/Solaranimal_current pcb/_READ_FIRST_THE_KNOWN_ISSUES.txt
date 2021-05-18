@@ -4,5 +4,5 @@
 2.) Vcc is too high 
 --> fix: change R2 from 330k to 650k because Vgth of Q1 in our new pool is 1.7V (before in first prototypes Vgth=1.0V) Vcc should be ca. 4.4V
 
-3.) footprint of Q2 has wrong direction because we use an different mosfet as Q2 (ZVN4206 is the new one, BS170 the older one)
---> fix: Q2 is the same direction as Q1
+3.) footprint of Q2 has wrong direction because we use now an different mosfet as Q2 (tn0604 or ZVN4206 are the better ones, BS170 the older one)
+--> fix: Q2 (tn0604 or ZVN4206) is mounted like Q1
