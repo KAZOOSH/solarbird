@@ -51,7 +51,7 @@ class LEDs
 			bitWrite( DDRB, PIN_LED_CATHODES, 0 );
 		}
 
-		unsigned int static senseRawBrightness( const unsigned int dischargeTimeWindowCycles=maxRawBrightness )
+		unsigned int static senseRawBrightness( const bool disableInterrupts=true, const unsigned int dischargeTimeWindowCycles=maxRawBrightness )
 		{
 			// make pins outputs
 			bitWrite( DDRB, PIN_LED_1_ANODE, 1 );
@@ -69,6 +69,9 @@ class LEDs
 			// initialize counter to maximum
 			unsigned int dischargeCycles = dischargeTimeWindowCycles;
 
+			// disable interrupts for better accuracy
+			if ( disableInterrupts ) { noInterrupts(); }
+
 			// change anodes to inputs (start discharging towards potential of cathodes)
 			bitWrite( DDRB, PIN_LED_1_ANODE, 0 );
 			bitWrite( DDRB, PIN_LED_2_ANODE, 0 );
@@ -82,16 +85,19 @@ class LEDs
 				dischargeCycles--;
 			}
 
+			// re-enable interrupts if previously disabled
+			if ( disableInterrupts ) { interrupts(); }
+
 			// restore LED state
 			off();
 
 			return dischargeCycles;
 		}
 
-		int static senseBrightness( const unsigned int dischargeTimeWindowCycles=maxRawBrightness )
+		int static senseBrightness( const bool disableInterrupts=true, const unsigned int dischargeTimeWindowCycles=maxRawBrightness )
 		{
 			// measure raw brightness and compute complement (i.e., low values map to high brightness)
-			unsigned int rawDarkness = maxRawBrightness - senseRawBrightness();
+			unsigned int rawDarkness = maxRawBrightness - senseRawBrightness( disableInterrupts, dischargeTimeWindowCycles );
 
 			// poor man's logarithm: shift until remainder is 1 -> floor(log(x,2))
 			int powerOfTwo = 0;
