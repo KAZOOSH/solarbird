@@ -6,7 +6,7 @@ class LowPower
 {
 	public:
 
-		void static sleepOneSecond()
+		void static sleepSecond()
 		{
 			// initialize watchdog timer to wake up after one second
 			// 8.5.2 (page 45) in datasheet: http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf
@@ -31,7 +31,7 @@ class LowPower
 		{
 			while( seconds > 0 )
 			{
-				sleepOneSecond();
+				sleepSecond();
 				seconds--;
 			}
 		}
