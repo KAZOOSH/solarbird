@@ -12,10 +12,9 @@ const bool lightLEDsWhenPlaying = true;
 const int activityMaximum = 8; // should be divisible by the difference of activeSoundInterval*
 const int activeSoundIntervalMinimum = 1;
 const int activeSoundIntervalMaximum = 5; // should be a power of 2 greater than the minimum
-const int idleDaySoundIntervalMinimum = 60*20;
-const int idleDaySoundIntervalMaximum = 60*40;
-const int idleNightSoundIntervalMinimum = 60*60*7; // all intervals must be smaller than 32768
-const int idleNightSoundIntervalMaximum = 60*60*9;
+const int idleSoundIntervalMinimum = 60*10; // all intervals must be smaller than 32768
+const int idleSoundIntervalMaximum = 60*60;
+const int nightModeSleepSeconds = 3;
 
 
 // High-level access to I/O and system features //
@@ -122,27 +121,20 @@ void loop()
 		}
 		else
 		{
-			if ( dark )
-			{
-				// night mode
-				cyclesBeforeNextSound = random( idleNightSoundIntervalMinimum, idleNightSoundIntervalMaximum+1 );
-			}
-			else
-			{
-				// day mode
-				cyclesBeforeNextSound = random( idleDaySoundIntervalMinimum, idleDaySoundIntervalMaximum+1 );
-			}
+			cyclesBeforeNextSound = random( idleSoundIntervalMinimum, idleSoundIntervalMaximum+1 );
 		}
 	}
 	else
 	{
-		// decrease counter
-		cyclesBeforeNextSound--;
+		// stop counter when in night mode, i.e., remain silent at night
+		if ( !dark ) {
+			cyclesBeforeNextSound--;
+		}
 	}
 
 	// decrease activity level
 	if ( activity > 0 ) { activity--; }
 
-	// wait one second until next cycle
-	LowPower::sleepOneSecond();
+	// wait 1 second by day (2 seconds by night) until next cycle
+	LowPower::sleepSeconds( dark && !active ? nightModeSleepSeconds : 1 );
 }
