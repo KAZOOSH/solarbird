@@ -9,7 +9,7 @@
 
 const bool runStartupTest = false;
 const bool powerDownAfterStartIfDark = true;
-const unsigned long powerDownAfterStartIfDarkTimeoutMillis = 3*1000;
+const unsigned long powerDownAfterStartIfDarkTimeoutMillis = 5*1000;
 const bool lightLEDsWhenPlaying = true;
 const int activityMaximum = 8; // should be divisible by the difference of activeSoundInterval*
 const int activeSoundIntervalMinimum = 1;
