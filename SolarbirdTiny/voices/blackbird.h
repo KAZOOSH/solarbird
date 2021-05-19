@@ -1,4 +1,5 @@
 // nick@bitfasching.de, Kazoosh, 2021
+// Original bird voice: https://www.nabu.de/downloads/vogelportraets/Amsel_Gesang_NABU_Lars_Lachmann.mp3
 
 class Blackbird
 {
