@@ -8,6 +8,8 @@
 #define PIN_LED_CATHODES 2
 
 const bool runStartupTest = false;
+const bool powerDownAfterStartIfDark = true;
+const unsigned long powerDownAfterStartIfDarkTimeoutMillis = 3*1000;
 const bool lightLEDsWhenPlaying = true;
 const int activityMaximum = 8; // should be divisible by the difference of activeSoundInterval*
 const int activeSoundIntervalMinimum = 1;
@@ -53,6 +55,26 @@ void setup()
 		}
 
 		delay( 1000 );
+	}
+
+	if ( powerDownAfterStartIfDark )
+	{
+		// check if environment is not dark
+		bool dark = true;
+		unsigned long startTime = millis();
+		while ( millis()-startTime <= powerDownAfterStartIfDarkTimeoutMillis ) {
+			if ( LEDs::senseRawBrightness( false ) > 0 ) {
+				dark = false;
+				break;
+			}
+		}
+		if ( dark ) {
+			// no brightness sensed within defined time window, power down and don't wake up until external reset
+			Piezo::on();
+			Piezo::tone( 1E6/220, 1E6 );
+			Piezo::off();
+			LowPower::powerDown();
+		}
 	}
 
 	// initialize random number generator with external source of randomness

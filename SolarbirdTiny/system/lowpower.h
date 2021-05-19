@@ -35,6 +35,14 @@ class LowPower
 				seconds--;
 			}
 		}
+
+		void static powerDown()
+		{
+			// set and enter deep sleep mode, will only wake up on external reset
+			noInterrupts();
+			set_sleep_mode( SLEEP_MODE_PWR_DOWN );
+			sleep_mode();
+		}
 };
 
 // dummy interrupt service routine for watchdog timer
