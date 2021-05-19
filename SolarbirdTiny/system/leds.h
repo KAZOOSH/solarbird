@@ -66,9 +66,6 @@ class LEDs
 			// wait to charge
 			delay( 1 );
 
-			// disable interrupts during measurement
-			noInterrupts();
-
 			// initialize counter to maximum
 			unsigned int dischargeCycles = dischargeTimeWindowCycles;
 
@@ -84,9 +81,6 @@ class LEDs
 				}
 				dischargeCycles--;
 			}
-
-			// re-enable interrupts
-			interrupts();
 
 			// restore LED state
 			off();
