@@ -2,3 +2,4 @@ https://www.researchgate.net/publication/265036087_Analog_Front-End_Circuitry_in
 https://ww1.microchip.com/downloads/en/DeviceDoc/2N7000-N-Channel-Enhancement-Mode-Vertical-DMOS-FET-Data-Sheet-20005695A.pdf
 https://simplifier.neocities.org/joule.html
 https://www.tme.eu/de/details/ld-bzpn-2312/elektromagnetische-signalgeber-ohne-gen/loudity/ #####Piezo bei TME
+https://www.onsemi.com/pdf/datasheet/mmbf170-d.pdf ##### BS170 Datasheed

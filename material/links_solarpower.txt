@@ -9,3 +9,7 @@ https://www.elektronik-labor.de/Notizen/LEDwandler.html
 https://datasheetspdf.com/datasheet/YX8051.html
 https://oberguru.net/elektronik/led/step-up-wandler/qx5252/qx5252.html
 
+https://www.electronicdeveloper.de/InduktivitaetSpeicherSNT.aspx ####Berechnung von Speicherdrosseln
+https://www.tdk-electronics.tdk.com/download/528882/71e02c7b9384de1331b3f625ce4b2123/pdf-n87.pdf ####Kernmaterial N87
+https://www.tdk-electronics.tdk.com/inf/80/db/fer/r_10_0_6_00_4_00.pdf ####Toroid core 10x6x4
+
