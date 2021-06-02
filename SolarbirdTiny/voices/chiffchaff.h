@@ -7,7 +7,7 @@ class Chiffchaff
 
 		Chiffchaff() {}
 
-		static const unsigned char numMelodies = 2;
+		static const unsigned char numMelodies = 11;
 
 		void static playSingleMelody( unsigned char melodySelector, bool lightLEDs=false )
 		{
@@ -24,6 +24,9 @@ class Chiffchaff
 						if ( lightLEDs ) { LEDs::off(); }
 						delay( i == 0 ? 200 : 170 );
 					}
+					break;
+
+				case 1:
 					if ( lightLEDs ) { LEDs::glow(); }
 					Piezo::on();
 					Piezo::chirp( 1E6/6500, 1E6/5000, 1 );
@@ -36,6 +39,9 @@ class Chiffchaff
 					Piezo::off();
 					if ( lightLEDs ) { LEDs::off(); }
 					delay( 160 );
+					break;
+
+				case 2:
 					for ( int i = 0; i < 2; i++ ) {
 						if ( lightLEDs ) { LEDs::glow(); }
 						Piezo::on();
@@ -48,6 +54,9 @@ class Chiffchaff
 						if ( lightLEDs ) { LEDs::off(); }
 						delay( i == 0 ? 200 : 150 );
 					}
+					break;
+
+				case 3:
 					if ( lightLEDs ) { LEDs::glow(); }
 					Piezo::on();
 					Piezo::chirp( 1E6/6200, 1E6/5200, 1 );
@@ -60,6 +69,9 @@ class Chiffchaff
 					Piezo::off();
 					if ( lightLEDs ) { LEDs::off(); }
 					delay( 190 );
+					break;
+
+				case 4:
 					if ( lightLEDs ) { LEDs::glow(); }
 					Piezo::on();
 					Piezo::chirp( 1E6/6200, 1E6/5000, 1 );
@@ -72,6 +84,9 @@ class Chiffchaff
 					Piezo::off();
 					if ( lightLEDs ) { LEDs::off(); }
 					delay( 200 );
+					break;
+
+				case 5:
 					if ( lightLEDs ) { LEDs::glow(); }
 					Piezo::on();
 					Piezo::chirp( 1E6/6000, 1E6/4500, 1 );
@@ -80,6 +95,9 @@ class Chiffchaff
 					Piezo::off();
 					if ( lightLEDs ) { LEDs::off(); }
 					delay( 270 );
+					break;
+
+				case 6:
 					for ( int i = 0; i < 2; i++ ) {
 						if ( lightLEDs ) { LEDs::glow(); }
 						Piezo::on();
@@ -91,6 +109,9 @@ class Chiffchaff
 						if ( lightLEDs ) { LEDs::off(); }
 						delay( i == 0 ? 220 : 200 );
 					}
+					break;
+
+				case 7:
 					if ( lightLEDs ) { LEDs::glow(); }
 					Piezo::on();
 					Piezo::chirp( 1E6/6000, 1E6/5200, 1 );
@@ -102,9 +123,10 @@ class Chiffchaff
 					Piezo::chirp( 1E6/4700, 1E6/4100, 1 );
 					Piezo::off();
 					if ( lightLEDs ) { LEDs::off(); }
+					delay( 200 );
 					break;
 
-				case 1:
+				case 8:
 					for ( int i = 0; i < 2; i++ ) {
 						if ( lightLEDs ) { LEDs::glow(); }
 						Piezo::on();
@@ -115,6 +137,9 @@ class Chiffchaff
 						if ( lightLEDs ) { LEDs::off(); }
 						delay( 200 );
 					}
+					break;
+
+				case 9:
 					for ( int i = 0; i < 4; i++ ) {
 						if ( lightLEDs ) { LEDs::glow(); }
 						Piezo::on();
@@ -128,6 +153,9 @@ class Chiffchaff
 						if ( lightLEDs ) { LEDs::off(); }
 						delay( 220 );
 					}
+					break;
+
+				case 10:
 					for ( int i = 0; i < 3; i++ ) {
 						if ( lightLEDs ) { LEDs::glow(); }
 						Piezo::on();
@@ -141,8 +169,9 @@ class Chiffchaff
 						Piezo::chirp( 1E6/4600, 1E6/4100, 1 );
 						Piezo::off();
 						if ( lightLEDs ) { LEDs::off(); }
-						delay( i < 2 ? 240 : 0 );
+						delay( 240 );
 					}
+					break;
 			}
 		}
 
@@ -154,7 +183,10 @@ class Chiffchaff
 			// get new start index that is different from last one
 			melodyStartIndex = ( melodyStartIndex + random( 1, numMelodies-1+1 ) ) % numMelodies;
 
-			// play a single long melody
-			playSingleMelody( melodyStartIndex, lightLEDs );
+			// play 5-7 consecutive melodies
+			int count = random( 5, 7+1 );
+			for ( int i = 0; i < count; i++ ) {
+				playSingleMelody( (melodyStartIndex+i) % numMelodies, lightLEDs );
+			}
 		}
 };
