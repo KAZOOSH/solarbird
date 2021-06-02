@@ -8,7 +8,7 @@
 #define PIN_LED_CATHODES 2
 
 const bool runStartupTest = false;
-const bool powerDownAfterStartIfDark = true;
+const bool powerDownAfterStartIfDark = false;
 const unsigned long powerDownAfterStartIfDarkTimeoutMillis = 5*1000;
 const bool lightLEDsWhenPlaying = true;
 const int activityMaximum = 8; // should be divisible by the difference of activeSoundInterval*
@@ -16,7 +16,7 @@ const int activeSoundIntervalMinimum = 1;
 const int activeSoundIntervalMaximum = 5; // should be a power of 2 greater than the minimum
 const int idleSoundIntervalMinimum = 60*10; // all intervals must be smaller than 32768
 const int idleSoundIntervalMaximum = 60*60;
-const int nightModeSleepSeconds = 3;
+const int nightModeSleepSeconds = 2;
 
 
 // High-level access to I/O and system features //
