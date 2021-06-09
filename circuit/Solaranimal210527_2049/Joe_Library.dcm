@@ -1,0 +1,38 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP BS108
+D 0.25A Id, 200V Vds, N-Channel MOSFET, TO-92
+K N-Channel MOSFET
+F http://www.redrok.com/MOSFET_BS108_200V_250mA_8O_Vth1.5_TO-92.PDF
+$ENDCMP
+#
+$CMP BS170
+D 0.5A Id, 60V Vds, N-Channel MOSFET, TO-92
+K N-Channel MOSFET
+F https://www.onsemi.com/pub/Collateral/BS170-D.PDF
+$ENDCMP
+#
+$CMP NiMH_1,25V_600mAh
+D NiMH Single-cell akku
+K battery cell NiMH
+F ~
+$ENDCMP
+#
+$CMP QX5252F
+D Solar LED NiMH voltage converter
+F https://skootsone.yolasite.com/resources/QX5252.pdf
+$ENDCMP
+#
+$CMP SW_Push_standard_6x6_four_pins
+D Push button switch, generic, four pins
+K switch normally-open pushbutton push-button
+F ~
+$ENDCMP
+#
+$CMP ZVN4206AVSTZ
+D N-Channel MOSFET, TO-92 0,6A Id, 60V Vds, 1,5Ohm Rdson @ Vgs=5V
+K N-Channel MOSFET
+F https://docs.rs-online.com/0ef4/0900766b81321be1.pdf
+$ENDCMP
+#
+#End Doc Library

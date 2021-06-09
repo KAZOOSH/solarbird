@@ -3,3 +3,4 @@ https://ww1.microchip.com/downloads/en/DeviceDoc/2N7000-N-Channel-Enhancement-Mo
 https://simplifier.neocities.org/joule.html
 https://www.tme.eu/de/details/ld-bzpn-2312/elektromagnetische-signalgeber-ohne-gen/loudity/ #####Piezo bei TME
 https://www.onsemi.com/pdf/datasheet/mmbf170-d.pdf ##### BS170 Datasheed
+http://schmidt-walter-schaltnetzteile.de/smps/smps.html #####Dimensionierung von Schaltnetzteilen
