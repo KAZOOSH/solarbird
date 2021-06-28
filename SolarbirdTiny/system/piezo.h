@@ -42,10 +42,12 @@ class Piezo
 			}
 		}
 
-		void static chirp( unsigned long tonePeriodStart, unsigned long tonePeriodEnd, unsigned long tonePeriodQuarterStep )
+		void static chirp( unsigned long tonePeriodStart, unsigned long tonePeriodEnd, unsigned long tonePeriodStep, unsigned int tonePeriodStepInterval=4, bool disableInterrupts=true )
 		{
 			unsigned long tonePeriod = tonePeriodStart;
-			unsigned char halfCycle = 0;
+			unsigned int halfCycle = 0;
+
+			if ( disableInterrupts ) { noInterrupts(); }
 
 			// up
 			if ( tonePeriodStart > tonePeriodEnd )
@@ -55,8 +57,9 @@ class Piezo
 					halfCycle++;
 					Piezo::toggle();
 					delayMicroseconds( tonePeriod/2 );
-					if ( halfCycle % 4 == 0 ) {
-						tonePeriod -= tonePeriodQuarterStep;
+					if ( halfCycle == tonePeriodStepInterval ) {
+						tonePeriod -= tonePeriodStep;
+						halfCycle = 0;
 					}
 				}
 			}
@@ -68,10 +71,13 @@ class Piezo
 					halfCycle++;
 					Piezo::toggle();
 					delayMicroseconds( tonePeriod/2 );
-					if ( halfCycle % 4 == 0 ) {
-						tonePeriod += tonePeriodQuarterStep;
+					if ( halfCycle == tonePeriodStepInterval ) {
+						tonePeriod += tonePeriodStep;
+						halfCycle = 0;
 					}
 				}
 			}
+
+			if ( disableInterrupts ) { interrupts(); }
 		}
 };
