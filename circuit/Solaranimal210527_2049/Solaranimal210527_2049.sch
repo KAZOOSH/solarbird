@@ -8,7 +8,7 @@ Title "Solaranima210527_2049"
 Date "2021-05-27"
 Rev "1.1000"
 Comp "KAZOOSH!"
-Comment1 "V1.100(different circuit design with external charging)"
+Comment1 "V1.101(add R8 for saver startup, higher Vth of Q2 possible)"
 Comment2 "open hardware: github.com/kazoosh"
 Comment3 ""
 Comment4 ""
@@ -75,58 +75,58 @@ $EndComp
 $Comp
 L power:GND #PWR03
 U 1 1 6064EFB8
-P 3200 4800
-F 0 "#PWR03" H 3200 4550 50  0001 C CNN
-F 1 "GND" H 3205 4627 50  0000 C CNN
-F 2 "" H 3200 4800 50  0001 C CNN
-F 3 "" H 3200 4800 50  0001 C CNN
-	1    3200 4800
+P 3000 4800
+F 0 "#PWR03" H 3000 4550 50  0001 C CNN
+F 1 "GND" H 3005 4627 50  0000 C CNN
+F 2 "" H 3000 4800 50  0001 C CNN
+F 3 "" H 3000 4800 50  0001 C CNN
+	1    3000 4800
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR02
 U 1 1 6064F3E5
-P 2650 4800
-F 0 "#PWR02" H 2650 4550 50  0001 C CNN
-F 1 "GND" H 2655 4627 50  0000 C CNN
-F 2 "" H 2650 4800 50  0001 C CNN
-F 3 "" H 2650 4800 50  0001 C CNN
-	1    2650 4800
+P 2450 4800
+F 0 "#PWR02" H 2450 4550 50  0001 C CNN
+F 1 "GND" H 2455 4627 50  0000 C CNN
+F 2 "" H 2450 4800 50  0001 C CNN
+F 3 "" H 2450 4800 50  0001 C CNN
+	1    2450 4800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3200 4350 3200 4800
+	3000 4350 3000 4800
 $Comp
 L Device:R R4
 U 1 1 606534F1
-P 3200 2900
-F 0 "R4" H 3270 2946 50  0000 L CNN
-F 1 "220k" H 3270 2855 50  0000 L CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3130 2900 50  0001 C CNN
-F 3 "~" H 3200 2900 50  0001 C CNN
-	1    3200 2900
+P 3000 2900
+F 0 "R4" H 3070 2946 50  0000 L CNN
+F 1 "220k" H 3070 2855 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2930 2900 50  0001 C CNN
+F 3 "~" H 3000 2900 50  0001 C CNN
+	1    3000 2900
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R3
 U 1 1 606547AF
-P 2650 2900
-F 0 "R3" H 2720 2946 50  0000 L CNN
-F 1 "510k" H 2720 2855 50  0000 L CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2580 2900 50  0001 C CNN
-F 3 "~" H 2650 2900 50  0001 C CNN
-	1    2650 2900
+P 2450 2900
+F 0 "R3" H 2520 2946 50  0000 L CNN
+F 1 "510k" H 2520 2855 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2380 2900 50  0001 C CNN
+F 3 "~" H 2450 2900 50  0001 C CNN
+	1    2450 2900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2650 4350 2650 4800
+	2450 4350 2450 4800
 Wire Wire Line
-	2650 3150 2900 3150
+	2450 3150 2700 3150
 Wire Wire Line
-	2900 3150 2900 4150
-Connection ~ 2650 3150
+	2700 3150 2700 4150
+Connection ~ 2450 3150
 Wire Wire Line
-	2650 3150 2650 3050
+	2450 3150 2450 3050
 $Comp
 L Device:L_Core_Ferrite L1
 U 1 1 60662572
@@ -174,9 +174,9 @@ $EndComp
 Wire Wire Line
 	7250 3150 7250 3350
 Wire Wire Line
-	2650 2400 2650 2750
+	2450 2400 2450 2750
 Wire Wire Line
-	3200 2400 3200 2750
+	3000 2400 3000 2750
 Wire Wire Line
 	7250 2400 7250 3150
 Connection ~ 7250 3150
@@ -216,23 +216,21 @@ Wire Wire Line
 Wire Wire Line
 	6350 3900 6350 4800
 Wire Wire Line
-	3200 2400 2650 2400
+	3000 2400 2450 2400
 $Comp
 L Device:R R1
 U 1 1 60654BA9
-P 2000 2900
-F 0 "R1" H 2050 2950 50  0000 L CNN
-F 1 "1M" H 2050 2850 50  0000 L CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" H 2070 2809 50  0001 L CNN
-F 3 "~" H 2000 2900 50  0001 C CNN
-	1    2000 2900
+P 1800 2900
+F 0 "R1" H 1850 2950 50  0000 L CNN
+F 1 "1M" H 1850 2850 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" H 1870 2809 50  0001 L CNN
+F 3 "~" H 1800 2900 50  0001 C CNN
+	1    1800 2900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2300 2400 2300 2750
-Wire Wire Line
-	7250 2400 3200 2400
-Connection ~ 3200 2400
+	2100 2400 2100 2750
+Connection ~ 3000 2400
 Wire Wire Line
 	4850 2650 4850 2850
 $Comp
@@ -528,31 +526,31 @@ $EndComp
 $Comp
 L Joe_Library:BS170 Q2
 U 1 1 60B13145
-P 3100 4150
-F 0 "Q2" H 3000 4350 50  0000 L CNN
-F 1 "BS170" H 2900 3800 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 3300 4075 50  0001 L CIN
-F 3 "https://www.onsemi.com/pub/Collateral/BS170-D.PDF" H 3100 4150 50  0001 L CNN
-	1    3100 4150
+P 2900 4150
+F 0 "Q2" H 2800 4350 50  0000 L CNN
+F 1 "BS170" H 2700 3800 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 3100 4075 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/BS170-D.PDF" H 2900 4150 50  0001 L CNN
+	1    2900 4150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3200 3050 3200 3150
-Connection ~ 3200 3150
+	3000 3050 3000 3150
+Connection ~ 3000 3150
 Wire Wire Line
-	3200 3150 3200 3950
+	3000 3150 3000 3950
 $Comp
 L Device:C C3
 U 1 1 60B4A25E
-P 2300 2900
-F 0 "C3" H 2415 2946 50  0000 L CNN
-F 1 "1n" H 2400 2800 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D4.7mm_W2.5mm_P5.00mm" H 2338 2750 50  0001 C CNN
-F 3 "~" H 2300 2900 50  0001 C CNN
-	1    2300 2900
+P 2100 2900
+F 0 "C3" H 2215 2946 50  0000 L CNN
+F 1 "1n" H 2200 2800 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D4.7mm_W2.5mm_P5.00mm" H 2138 2750 50  0001 C CNN
+F 3 "~" H 2100 2900 50  0001 C CNN
+	1    2100 2900
 	1    0    0    -1  
 $EndComp
-Connection ~ 2650 2400
+Connection ~ 2450 2400
 $Comp
 L Diode:BAT48RL D2
 U 1 1 60B1425F
@@ -583,67 +581,66 @@ Wire Wire Line
 Wire Wire Line
 	3600 4350 4250 4350
 Wire Wire Line
-	2300 2400 2000 2400
+	2100 2400 1800 2400
 Wire Wire Line
-	2000 2400 2000 2750
-Connection ~ 2300 2400
+	1800 2400 1800 2750
+Connection ~ 2100 2400
 Wire Wire Line
-	2650 3950 2650 3150
+	2450 3950 2450 3150
 Wire Wire Line
-	2300 3050 2300 4150
+	2100 3050 2100 4150
 Wire Wire Line
-	2000 4650 2000 4800
+	1800 4650 1800 4800
 $Comp
 L power:GND #PWR01
 U 1 1 606572F7
-P 2000 4800
-F 0 "#PWR01" H 2000 4550 50  0001 C CNN
-F 1 "GND" H 2005 4627 50  0000 C CNN
-F 2 "" H 2000 4800 50  0001 C CNN
-F 3 "" H 2000 4800 50  0001 C CNN
-	1    2000 4800
+P 1800 4800
+F 0 "#PWR01" H 1800 4550 50  0001 C CNN
+F 1 "GND" H 1805 4627 50  0000 C CNN
+F 2 "" H 1800 4800 50  0001 C CNN
+F 3 "" H 1800 4800 50  0001 C CNN
+	1    1800 4800
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R2
 U 1 1 6065521D
-P 2000 4500
-F 0 "R2" H 2070 4546 50  0000 L CNN
-F 1 "1M" H 2070 4455 50  0000 L CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 1930 4500 50  0001 C CNN
-F 3 "~" H 2000 4500 50  0001 C CNN
-	1    2000 4500
+P 1800 4500
+F 0 "R2" H 1870 4546 50  0000 L CNN
+F 1 "1M" H 1870 4455 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 1730 4500 50  0001 C CNN
+F 3 "~" H 1800 4500 50  0001 C CNN
+	1    1800 4500
 	1    0    0    -1  
 $EndComp
 $Comp
 L Transistor_FET:2N7000 Q1
 U 1 1 6064ACD5
-P 2550 4150
-F 0 "Q1" H 2700 4350 50  0000 L CNN
-F 1 "2N7000" H 2300 3800 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 2750 4075 50  0001 L CIN
-F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 2550 4150 50  0001 L CNN
-	1    2550 4150
+P 2350 4150
+F 0 "Q1" H 2500 4350 50  0000 L CNN
+F 1 "2N7000" H 2100 3800 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 2550 4075 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 2350 4150 50  0001 L CNN
+	1    2350 4150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2000 3050 2000 4150
+	1800 3050 1800 4150
 Wire Wire Line
-	2300 4150 2000 4150
-Connection ~ 2300 4150
-Connection ~ 2000 4150
+	2100 4150 1800 4150
+Connection ~ 2100 4150
+Connection ~ 1800 4150
 Wire Wire Line
-	2000 4150 2000 4350
+	1800 4150 1800 4350
 Text Notes 1900 6300 0    50   ~ 0
 2.)  Mosfets vor Einlöten auf Vgth @Id=4uA checken (Vgth=Vgs=Vds):\n      Q1 Vgth = 1,7V (Vcc=2Vgth)\n      Q2 Vgth < 1,8V (Startbedingung)\n      Bei unseren Kits haben wir das bereits getan.
 Text Notes 1900 6600 0    50   ~ 0
 3.)  L1 selbst wickeln:\n      7Windungen Schaltdraht 0,5mm auf blauen Ringkern TDK N87 10x6x4  (AL=900nH/N²)\n      L=N²*AL Schaltung getestet für N=7(stabilere Vcc unter Last) bis N=11(beste Energieeffizienz)
-Connection ~ 3600 3150
 $Comp
-L power:GND #PWR?
+L power:GND #PWR012
 U 1 1 60B535A1
 P 3900 2850
-F 0 "#PWR?" H 3900 2600 50  0001 C CNN
+F 0 "#PWR012" H 3900 2600 50  0001 C CNN
 F 1 "GND" H 3905 2677 50  0000 C CNN
 F 2 "" H 3900 2850 50  0001 C CNN
 F 3 "" H 3900 2850 50  0001 C CNN
@@ -655,7 +652,7 @@ Wire Wire Line
 Wire Wire Line
 	3600 3150 4500 3150
 Wire Wire Line
-	3200 3150 3600 3150
+	3000 3150 3300 3150
 Wire Wire Line
 	3700 2850 3900 2850
 Text Notes 1900 6900 0    50   ~ 0
@@ -676,9 +673,9 @@ F 3 "https://docs.rs-online.com/17fc/0900766b8160dc5b.pdf" H 8750 4850 50  0001 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2300 2400 2650 2400
+	2100 2400 2450 2400
 Wire Wire Line
-	2300 4150 2350 4150
+	2100 4150 2150 4150
 Text Notes 1900 6750 0    50   ~ 0
 4.)  SW2 nur 2 diagonale Pins verlöten (egal welche) die anderen beiden Pins entfernen.
 Text Notes 1900 5250 0    100  ~ 20
@@ -688,7 +685,7 @@ Text Notes 1900 7200 0    50   ~ 0
 Text Notes 1900 5900 0    50   ~ 0
 1.)  Flache Bauteile zuerst löten. Batteriehalter zuletzt. Mosfets, LEDs und ICs sind empfindlich gegen elektrostatische Aufladung.
 Text Notes 1900 7500 0    50   ~ 0
-9.)  Zum Start Batterieschalter in Richtung PIEZO schieben und RESET drücken.
+9.)  R8 wird durch J1 und J2 gesteckt und gelötet. 
 Text Notes 1900 5750 0    50   ~ 0
 Die Solaranimals sind eine androide energieautarke Lebensform. (Sie wissen es nur noch nicht!) Sie können je nach Firmware mehrere Tage oder Wochen mit einem sonnengeladenen 1,2V NiMH-Akku überleben.\n\nDie Sonne lädt den Akku ständig nach. Wenn er doch mal leer ist, einfach den Vogel für einen Tag oder mehrere in die Sonne legen. Dabei geht es etwas schneller, wenn der Schiebeschalter ausgeschaltet ist (in Richtung SOLAR).\n\nAm wohlsten fühlen sich die Solarvögel in der Gruppe. Sie mögen es warm, sonnig und trocken.....
 Text Notes 2450 1850 0    276  ~ 55
@@ -697,4 +694,38 @@ Text Notes 600  900  0    100  ~ 20
 Bitspecht   Krachstelze   C Adler   Soundkönig   Blitzhuhn   Bugfink   Atmsel   Whilewachtel   Microchirp   Solderling   Bootkehlchen
 Text Notes 1900 7350 0    50   ~ 0
 8.)  C3 wird über R1 gelötet.
+$Comp
+L Device:R R8
+U 1 1 60DBB7AF
+P 3300 4500
+F 0 "R8" H 3370 4546 50  0000 L CNN
+F 1 "33k" H 3370 4455 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3230 4500 50  0001 C CNN
+F 3 "~" H 3300 4500 50  0001 C CNN
+	1    3300 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR011
+U 1 1 60DBCF38
+P 3300 4800
+F 0 "#PWR011" H 3300 4550 50  0001 C CNN
+F 1 "GND" H 3305 4627 50  0000 C CNN
+F 2 "" H 3300 4800 50  0001 C CNN
+F 3 "" H 3300 4800 50  0001 C CNN
+	1    3300 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3300 3150 3300 4350
+Wire Wire Line
+	3300 4650 3300 4800
+Connection ~ 3300 3150
+Wire Wire Line
+	3300 3150 3600 3150
+Connection ~ 3600 3150
+Wire Wire Line
+	3000 2400 7250 2400
+Text Notes 1850 7650 0    50   ~ 0
+10.)  Zum Start Batterieschalter in Richtung PIEZO schieben und RESET drücken.
 $EndSCHEMATC
