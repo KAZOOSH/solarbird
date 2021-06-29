@@ -17,6 +17,7 @@ const int activeSoundIntervalMaximum = 5; // should be a power of 2 greater than
 const int idleSoundIntervalMinimum = 60*10; // all intervals must be smaller than 32768
 const int idleSoundIntervalMaximum = 60*60;
 const int nightModeSleepSeconds = 2;
+const bool silentAtNight = false;
 
 
 // High-level access to I/O and system features //
@@ -149,7 +150,7 @@ void loop()
 	else
 	{
 		// stop counter when in night mode, i.e., remain silent at night
-		if ( !dark ) {
+		if ( !dark || !silentAtNight ) {
 			cyclesBeforeNextSound--;
 		}
 	}
