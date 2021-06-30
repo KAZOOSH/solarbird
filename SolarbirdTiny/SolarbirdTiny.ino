@@ -1,11 +1,30 @@
 // nick@bitfasching.de, Kazoosh, 2021
 // For ATtiny85 @ 8 MHz
 
+
+// I/O pins //
+
 #define PIN_PIEZO_A 3
 #define PIN_PIEZO_B 4
 #define PIN_LED_1_ANODE 0
 #define PIN_LED_2_ANODE 1
 #define PIN_LED_CATHODES 2
+
+
+// High-level access to I/O and system features //
+
+#include "system/leds.h"
+#include "system/piezo.h"
+#include "system/lowpower.h"
+
+
+// Bird voice //
+
+#include "voices/blackbird.h"
+Blackbird Bird;
+
+
+// Behaviour settings //
 
 const bool runStartupTest = false;
 const bool powerDownAfterStartIfDark = false;
@@ -18,19 +37,6 @@ const int idleSoundIntervalMinimum = 60*10; // all intervals must be smaller tha
 const int idleSoundIntervalMaximum = 60*60;
 const int nightModeSleepSeconds = 2;
 const bool silentAtNight = false;
-
-
-// High-level access to I/O and system features //
-
-#include "system/leds.h"
-#include "system/piezo.h"
-#include "system/lowpower.h"
-
-
-// Bird voices //
-
-#include "voices/blackbird.h"
-Blackbird Bird;
 
 
 // Main logic //
