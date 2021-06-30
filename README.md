@@ -13,7 +13,7 @@ zwitschernde Tiere zur Woche des guten Lebens 2021
 
 At the time of writing, we have an imitation of a blackbird, a chiffchaff, a titmouse and a wren. Check the folder [voices](SolarbirdTiny/voices/) for all available bird voices.
 
-In [SolarbirdTiny.ino near line 32](SolarbirdTiny/SolarbirdTiny.ino#L32), find the lines which include the bird voice and create a _Bird_ instance from it:
+In [SolarbirdTiny.ino near line 23](SolarbirdTiny/SolarbirdTiny.ino#L23), find the lines which include the bird voice and create a _Bird_ instance from it:
 ```c++
 #include "voices/blackbird.h"
 Blackbird Bird;
