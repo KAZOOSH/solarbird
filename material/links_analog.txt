@@ -4,3 +4,4 @@ https://simplifier.neocities.org/joule.html
 https://www.tme.eu/de/details/ld-bzpn-2312/elektromagnetische-signalgeber-ohne-gen/loudity/ #####Piezo bei TME
 https://www.onsemi.com/pdf/datasheet/mmbf170-d.pdf ##### BS170 Datasheed
 http://schmidt-walter-schaltnetzteile.de/smps/smps.html #####Dimensionierung von Schaltnetzteilen
+https://i.pinimg.com/originals/ae/01/0a/ae010a932937a33a02e720dccd400e55.jpg #####Farbcodes für Widerstände
