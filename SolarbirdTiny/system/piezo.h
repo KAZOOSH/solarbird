@@ -34,6 +34,7 @@ class Piezo
 		void static tone( unsigned long tonePeriod, unsigned long durationMicros )
 		{
 			unsigned long startMicros = micros();
+			tonePeriod -= 24; // compensate for CPU cycles between toggles
 
 			while ( micros()-startMicros < durationMicros )
 			{
