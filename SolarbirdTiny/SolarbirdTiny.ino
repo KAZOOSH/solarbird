@@ -23,6 +23,8 @@
 #include "voices/blackbird.h"
 Blackbird Bird;
 
+#include "voices/wedding.h"
+
 
 // Behaviour settings //
 
@@ -34,7 +36,7 @@ const int activityMaximum = 8; // should be divisible by the difference of activ
 const int activeSoundIntervalMinimum = 1;
 const int activeSoundIntervalMaximum = 5; // should be a power of 2 greater than the minimum
 const int idleSoundIntervalMinimum = 60*10; // all intervals must be smaller than 32768
-const int idleSoundIntervalMaximum = 60*60;
+const int idleSoundIntervalMaximum = 60*30;
 const int nightModeSleepSeconds = 2;
 const bool silentAtNight = false;
 
@@ -135,12 +137,21 @@ void loop()
 		active = false;
 	}
 
+	static unsigned char activityCounter = 0;
+	static const unsigned char specialInterval = 8;
+
 	// time to make noise?
 	// either after scheduled interval or on transition from idle to active
 	if ( cyclesBeforeNextSound == 0 || justBecameActive )
 	{
 		// play sound
-		Bird.play( lightLEDsWhenPlaying );
+		if ( activityCounter % specialInterval == 0 ) {
+			playWeddingMelody();
+		}
+		else {
+			Bird.play( lightLEDsWhenPlaying );
+		}
+		activityCounter++;
 
 		// determine waiting time before next sound (both for active and idle case)
 		if ( activity > 0 )
