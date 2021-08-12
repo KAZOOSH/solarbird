@@ -1,9 +1,12 @@
+;25mmHg Kazoosh, 2021
+; must be in the same directory like the .ino!!!!!!!!!!!!!!!!!!
+
 /* half-duplex 81N serial uart in hand-tuned assembler
  * 1%/2% Tx/Rx timing error for 115.2kbps@8Mhz
  * 2%/1% Tx/Rx timing error for 230.4kbps@8Mhz
  * optimized for no jitter vs AVR305 with 1 cycle/bit jitter
  * @author: Ralph Doncaster
- * @version: $Id$
+ * @orginalversion: BasicSerial3.S
  * link: https://nerdralph.blogspot.com/2014/01/avr-half-duplex-software-uart.html
  * shrink to TX only by 25mmHg
  */
@@ -14,6 +17,7 @@
 #define UART_Port (PORTB-0x20)
 #define UART_Tx 4 // DISCONNECT PIEZO !!!!!!!!!!!!!!!!!!!!!!!!
 
+;[GLOBAL implement TXTimedByte]
 .global TxTimedByte
 ; transmit byte in r24 with bit delay in r22 - 15 instructions
 ; calling code must set Tx line to idle state (high) or 1st byte may be lost

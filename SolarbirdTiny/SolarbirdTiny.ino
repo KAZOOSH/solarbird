@@ -17,7 +17,7 @@
 #include "system/leds.h"
 #include "system/piezo.h"
 #include "system/lowpower.h"
-#include "system/serialOut.h"
+#include "system/serialout.h"
 
 
 // Bird voice //
@@ -181,4 +181,4 @@ void loop()
 
   // wait 1 second by day (2 seconds by night) until next cycle
   LowPower::sleepSeconds( dark && !active ? nightModeSleepSeconds : 1 );
-}}
+}

@@ -3,8 +3,10 @@
 /* Optimized half-duplex serial uart implementation
  * timing within 2% using at 230.4kbps @ 8Mhz 
  * @author: Ralph Doncaster
- * @version: $Id$
+ * @orginalversion: BasicSerial3.h
  * link: https://nerdralph.blogspot.com/2014/01/avr-half-duplex-software-uart.html
+ * link: https://nerdralph.blogspot.com/2013/12/writing-avr-assembler-code-with-arduino.html
+ * link to newer version: https://github.com/nerdralph/nerdralph/blob/master/avr/picoUART.h
  * shrink to TX only by 25mmHg
  * use: printString("\nH E L L O\n");
  * use: printHex(10);
@@ -19,14 +21,16 @@
   #error CPU frequency F_CPU undefined
 #endif
 
-extern "C" {
-void TxTimedByte(char, char);
+extern "C"
+{
+	static void TxTimedByte(char, char);
+}
 
 class SerialOut
 {
 	public:
 
-		SerialOut() {}		
+		SerialOut() {}
 
 		static void printString(const char* str)
 		{
