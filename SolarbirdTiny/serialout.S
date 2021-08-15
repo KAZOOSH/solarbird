@@ -1,5 +1,5 @@
 ;25mmHg Kazoosh, 2021
-; must be in the same directory like the .ino!!!!!!!!!!!!!!!!!!
+; must be in the same directory with .ino!!!!!!!!!!!!!!!!!!
 
 /* half-duplex 81N serial uart in hand-tuned assembler
  * 1%/2% Tx/Rx timing error for 115.2kbps@8Mhz
@@ -17,7 +17,6 @@
 #define UART_Port (PORTB-0x20)
 #define UART_Tx 4 // DISCONNECT PIEZO !!!!!!!!!!!!!!!!!!!!!!!!
 
-;[GLOBAL implement TXTimedByte]
 .global TxTimedByte
 ; transmit byte in r24 with bit delay in r22 - 15 instructions
 ; calling code must set Tx line to idle state (high) or 1st byte may be lost

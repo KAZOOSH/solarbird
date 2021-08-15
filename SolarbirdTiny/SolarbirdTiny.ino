@@ -1,6 +1,8 @@
 // nick@bitfasching.de, Kazoosh, 2021
 // For ATtiny85 @ 8 MHz
 
+//Do you need serial debug messages?
+#define DEBUGMODE
 
 // I/O pins //
 
@@ -9,7 +11,6 @@
 #define PIN_LED_1_ANODE 0
 #define PIN_LED_2_ANODE 1
 #define PIN_LED_CATHODES 2
-#define DEBUGMODE
 
 
 // High-level access to I/O and system features //
@@ -17,7 +18,7 @@
 #include "system/leds.h"
 #include "system/piezo.h"
 #include "system/lowpower.h"
-#include "system/serialout.h"
+#include "serialout.h"
 
 
 // Bird voice //
