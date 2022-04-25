@@ -1,5 +1,5 @@
 # Solarbird
-zwitschernde Vögel auf Basis des ATtiny.
+Chirping birds with an ATtiny heart.
 
 ## How to flash SolarbirdTiny.ino with Arduino IDE
 
