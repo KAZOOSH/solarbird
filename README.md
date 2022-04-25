@@ -1,5 +1,5 @@
-# solaranimals
-zwitschernde Tiere zur Woche des guten Lebens 2021
+# Solarbird
+zwitschernde Vögel auf Basis des ATtiny.
 
 ## How to flash SolarbirdTiny.ino with Arduino IDE
 
